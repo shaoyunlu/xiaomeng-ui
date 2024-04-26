@@ -1,0 +1,144 @@
+.xmv-notification {
+    display: flex;
+    width: var(--xmv-notification-width);
+    padding: var(--xmv-notification-padding);
+    border-radius: var(--xmv-notification-radius);
+    box-sizing: border-box;
+    border: 1px solid var(--xmv-notification-border-color);
+    position: fixed;
+    background-color: var(--xmv-bg-color-overlay);
+    box-shadow: var(--xmv-notification-shadow);
+    transition: opacity var(--xmv-transition-duration),transform var(--xmv-transition-duration),left var(--xmv-transition-duration),right var(--xmv-transition-duration),top .4s,bottom var(--xmv-transition-duration);
+    overflow-wrap: anywhere;
+    overflow: hidden;
+    z-index: 9999;
+
+    &.right {
+        right: 16px;
+    }
+
+    &.left {
+        left: 16px;
+    }
+}
+
+.xmv-notification__group {
+    margin-left: var(--xmv-notification-group-margin-left);
+    margin-right: var(--xmv-notification-group-margin-right);
+}
+
+.xmv-notification__title {
+    font-weight: 700;
+    font-size: var(--xmv-notification-title-font-size);
+    line-height: var(--xmv-notification-icon-size);
+    color: var(--xmv-notification-title-color);
+    margin: 0;
+}
+
+.xmv-notification__content {
+    font-size: var(--xmv-notification-content-font-size);
+    line-height: 24px;
+    margin: 6px 0 0;
+    color: var(--xmv-notification-content-color);
+    text-align: justify;
+
+    p {
+        margin: 0;
+    }
+}
+
+.xmv-notification .xmv-notification__closeBtn {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    cursor: pointer;
+    color: var(--xmv-notification-close-color);
+    font-size: var(--xmv-notification-close-font-size);
+}
+
+.xmv-notification .xmv-notification__icon {
+    height: var(--xmv-notification-icon-size);
+    width: var(--xmv-notification-icon-size);
+    font-size: var(--xmv-notification-icon-size);
+}
+
+.xmv-notification .xmv-notification--success {
+    --xmv-notification-icon-color: var(--xmv-color-success);
+    color: var(--xmv-notification-icon-color);
+}
+
+.xmv-notification .xmv-notification--warning {
+    --xmv-notification-icon-color: var(--xmv-color-warning);
+    color: var(--xmv-notification-icon-color);
+}
+
+.xmv-notification .xmv-notification--error {
+    --xmv-notification-icon-color: var(--xmv-color-error);
+    color: var(--xmv-notification-icon-color);
+}
+
+.xmv-notification .xmv-notification--info {
+    --xmv-notification-icon-color: var(--xmv-color-info);
+    color: var(--xmv-notification-icon-color);
+}
+
+.xmv-notification-top-left-enter-active,
+.xmv-notification-top-left-leave-active,
+.xmv-notification-top-right-enter-active,
+.xmv-notification-top-right-leave-active,
+.xmv-notification-bottom-left-enter-active,
+.xmv-notification-bottom-left-leave-active,
+.xmv-notification-bottom-right-enter-active,
+.xmv-notification-bottom-right-leave-active
+{
+    transition: opacity var(--xmv-transition-duration) ,transform var(--xmv-transition-duration);
+    .xmv-notification{
+        transition: opacity var(--xmv-transition-duration) ,transform var(--xmv-transition-duration);
+    }
+}
+
+.xmv-notification-top-right-enter-from,
+.xmv-notification-bottom-right-enter-from {
+    opacity: 0;
+    .xmv-notification{
+        transform: translateX(100%);
+    }
+}
+
+.xmv-notification-top-left-enter-from,
+.xmv-notification-bottom-left-enter-from {
+    opacity: 0;
+    .xmv-notification{
+        transform: translateX(-100%);
+    }
+}
+
+.xmv-notification-top-left-enter-to,
+.xmv-notification-top-right-enter-to,
+.xmv-notification-bottom-left-enter-to,
+.xmv-notification-bottom-right-enter-to {
+    opacity: 1;
+}
+
+.xmv-notification-top-left-leave-from,
+.xmv-notification-top-right-leave-from,
+.xmv-notification-bottom-left-leave-from,
+.xmv-notification-bottom-right-leave-from {
+    opacity: 1;
+}
+
+.xmv-notification-top-right-leave-to,
+.xmv-notification-bottom-right-leave-to {
+    opacity: 0;
+    .xmv-notification{
+        transform: translateX(100%);
+    }
+}
+
+.xmv-notification-top-left-leave-to,
+.xmv-notification-bottom-left-leave-to {
+    opacity: 0;
+    .xmv-notification{
+        transform: translateX(-100%);
+    }
+}

@@ -1,0 +1,234 @@
+.xmv-radio-group {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0;
+}
+
+.xmv-radio-group {
+    margin-right: 12px;
+}
+
+.xmv-radio {
+    color: var(--xmv-radio-text-color);
+    font-weight: var(--xmv-radio-font-weight);
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    outline: none;
+    font-size: var(--xmv-font-size-base);
+    user-select: none;
+    margin-right: 32px;
+    height: 32px;
+    &:last-child{
+        margin-right: 0;
+    }
+    &.is-bordered {
+        padding: 0 15px 0 9px;
+        border-radius: var(--xmv-border-radius-base);
+        border: var(--xmv-border);
+        box-sizing: border-box;
+    }
+
+    &.is-bordered.is-checked {
+        border-color: var(--xmv-color-primary);
+    }
+    &.is-bordered.xmv-radio--large {
+        padding: 0 19px 0 11px;
+        border-radius: var(--xmv-border-radius-base);
+    }
+    &.is-bordered.xmv-radio--small {
+        padding: 0 11px 0 7px;
+        border-radius: var(--xmv-border-radius-base);
+    }
+    &.is-bordered.is-disabled {
+        cursor: not-allowed;
+        border-color: var(--xmv-border-color-lighter);
+    }
+}
+
+.xmv-radio__input {
+    white-space: nowrap;
+    cursor: pointer;
+    outline: none;
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+}
+
+.xmv-radio__original {
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+}
+
+.xmv-radio__inner {
+    border: var(--xmv-radio-input-border);
+    border-radius: var(--xmv-radio-input-border-radius);
+    width: var(--xmv-radio-input-width);
+    height: var(--xmv-radio-input-height);
+    background-color: var(--xmv-radio-input-bg-color);
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    &:after{
+        width: 4px;
+        height: 4px;
+        border-radius: var(--xmv-radio-input-border-radius);
+        background-color: var(--xmv-color-white);
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%) scale(0);
+        transition: transform .15s ease-in;
+    }
+}
+
+
+.xmv-radio__input.is-checked .xmv-radio__inner {
+    border-color: var(--xmv-color-primary);
+    background: var(--xmv-color-primary);
+    &:after{
+        transform: translate(-50%,-50%) scale(1);
+    }
+}
+
+.xmv-radio__label {
+    font-size: var(--xmv-radio-font-size);
+    padding-left: 8px;
+}
+
+.xmv-radio__input.is-checked+.xmv-radio__label {
+    color: var(--xmv-color-primary);
+}
+
+.xmv-radio.xmv-radio--large {
+    height: 40px;
+    .xmv-radio__inner {
+        width: 16px;
+        height: 16px;
+    }
+    .xmv-radio__label {
+        font-size: 16px;
+    }
+}
+
+.xmv-radio.xmv-radio--small {
+    height: 24px;
+    .xmv-radio__inner {
+        width: 12px;
+        height: 12px;
+    }
+    .xmv-radio__label {
+        font-size: 12px;
+    }
+}
+
+.xmv-radio__input.is-disabled .xmv-radio__inner {
+    background-color: var(--xmv-disabled-bg-color);
+    border-color: var(--xmv-disabled-border-color);
+    cursor: not-allowed;
+}
+
+.xmv-radio__input.is-disabled.is-checked .xmv-radio__inner {
+    background-color: var(--xmv-disabled-bg-color);
+    border-color: var(--xmv-disabled-border-color);
+}
+
+.xmv-radio__input.is-disabled .xmv-radio__inner:after {
+    cursor: not-allowed;
+    background-color: var(--xmv-disabled-bg-color);
+}
+
+.xmv-radio__input.is-disabled.is-checked .xmv-radio__inner:after {
+    background-color: var(--xmv-text-color-placeholder);
+}
+
+.xmv-radio__input.is-disabled+span.xmv-radio__label {
+    color: var(--xmv-text-color-placeholder);
+    cursor: not-allowed;
+}
+
+.xmv-radio-button {
+    position: relative;
+    display: inline-block;
+    outline: none;
+}
+
+.xmv-radio-button__original-radio {
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    z-index: -1;
+}
+
+.xmv-radio-button__inner {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: middle;
+    background: var(--xmv-button-bg-color, var(--xmv-fill-color-blank));
+    border: var(--xmv-border);
+    font-weight: var(--xmv-button-font-weight, var(--xmv-font-weight-primary));
+    border-left: 0;
+    color: var(--xmv-button-text-color, var(--xmv-text-color-regular));
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+    transition: var(--xmv-transition-all);
+    user-select: none;
+    padding: 8px 15px;
+    font-size: var(--xmv-font-size-base);
+    border-radius: 0;
+}
+
+.xmv-radio-button--large .xmv-radio-button__inner {
+    padding: 12px 19px;
+    font-size: var(--xmv-font-size-base);
+    border-radius: 0;
+}
+
+.xmv-radio-button--small .xmv-radio-button__inner {
+    padding: 5px 11px;
+    font-size: 12px;
+    border-radius: 0;
+}
+
+.xmv-radio-button:first-child .xmv-radio-button__inner {
+    border-left: var(--xmv-border);
+    border-radius: var(--xmv-border-radius-base) 0 0 var(--xmv-border-radius-base);
+    box-shadow: none!important;
+}
+
+.xmv-radio-button:last-child .xmv-radio-button__inner {
+    border-radius: 0 var(--xmv-border-radius-base) var(--xmv-border-radius-base) 0;
+}
+
+.xmv-radio-button__original-radio:checked+.xmv-radio-button__inner {
+    color: var(--xmv-radio-button-checked-text-color, var(--xmv-color-white));
+    background-color: var(--xmv-radio-button-checked-bg-color, var(--xmv-color-primary));
+    border-color: var(--xmv-radio-button-checked-border-color, var(--xmv-color-primary));
+    box-shadow: -1px 0 0 0 var(--xmv-radio-button-checked-border-color, var(--xmv-color-primary));
+}
+
+.xmv-radio-button__original-radio:disabled+.xmv-radio-button__inner {
+    color: var(--xmv-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--xmv-button-disabled-bg-color, var(--xmv-fill-color-blank));
+    border-color: var(--xmv-button-disabled-border-color, var(--xmv-border-color-light));
+    box-shadow: none;
+}

@@ -1,0 +1,231 @@
+.xmv-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    height: 32px;
+    white-space: nowrap;
+    cursor: pointer;
+    color: var(--xmv-button-text-color);
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    transition: .1s;
+    font-weight: var(--xmv-button-font-weight);
+    user-select: none;
+    vertical-align: middle;
+    background-color: var(--xmv-button-bg-color);
+    border: var(--xmv-border);
+    border-color: var(--xmv-button-border-color);
+    padding: 8px 15px;
+    font-size: var(--xmv-font-size-base);
+    border-radius: var(--xmv-border-radius-base);
+
+    >span{
+        display: inline-flex;
+        align-items: center;
+    }
+
+    &:hover,&:focus{
+        color: var(--xmv-button-hover-text-color);
+        border-color: var(--xmv-button-hover-border-color);
+        background-color: var(--xmv-button-hover-bg-color);
+        outline: none;
+    }
+
+    &:active{
+        color: var(--xmv-button-active-text-color);
+        border-color: var(--xmv-button-active-border-color);
+        background-color: var(--xmv-button-active-bg-color);
+        outline: none;
+    }
+}
+
+.xmv-button--large {
+    --xmv-button-size: 40px;
+    height: var(--xmv-button-size);
+    padding: 12px 19px;
+    font-size: var(--xmv-font-size-base);
+    border-radius: var(--xmv-border-radius-base);
+}
+
+.xmv-button--small {
+    --xmv-button-size: 24px;
+    height: var(--xmv-button-size);
+    padding: 5px 11px;
+    font-size: 12px;
+    border-radius: calc(var(--xmv-border-radius-base) - 1px);
+}
+
+.xmv-button.is-round {
+    border-radius: var(--xmv-border-radius-round);
+}
+
+.xmv-button.is-round {
+    padding: 8px 15px;
+}
+
+.xmv-button--large.is-round {
+    padding: 12px 19px;
+}
+
+.xmv-button--small.is-round {
+    padding: 5px 11px;
+}
+
+.xmv-button.is-circle {
+    border-radius: 50%;
+    padding: 8px;
+}
+
+.xmv-button--large.is-circle {
+    width: var(--xmv-button-size);
+    padding: 12px;
+}
+
+.xmv-button--small.is-circle {
+    width: var(--xmv-button-size);
+    padding: 5px;
+}
+
+.xmv-button.is-text {
+    color: var(--xmv-button-text-color);
+    border: 0 solid transparent;
+    background-color: transparent;
+}
+
+.xmv-button.is-link {
+    border-color: transparent;
+    color: var(--xmv-button-text-color);
+    background: transparent;
+    padding: 2px;
+    height: auto;
+}
+
+.xmv-button.is-link:hover, .xmv-button.is-link:focus {
+    color: var(--xmv-button-hover-link-text-color);
+}
+
+.xmv-button.is-text:not(.is-disabled):hover,
+.xmv-button.is-text:not(.is-disabled):focus {
+    background-color: var(--xmv-fill-color-light);
+}
+
+.xmv-button+.xmv-button {
+    margin-left: 12px;
+}
+
+.xmv-button.is-disabled, .xmv-button.is-disabled:hover, .xmv-button.is-disabled:focus {
+    color: var(--xmv-button-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--xmv-button-disabled-bg-color);
+    border-color: var(--xmv-button-disabled-border-color);
+}
+
+.xmv-button--primary.is-plain.is-disabled, .xmv-button--primary.is-plain.is-disabled:hover, 
+.xmv-button--primary.is-plain.is-disabled:focus, .xmv-button--primary.is-plain.is-disabled:active, 
+.xmv-button--primary.is-text.is-disabled, .xmv-button--primary.is-text.is-disabled:hover, 
+.xmv-button--primary.is-text.is-disabled:focus, .xmv-button--primary.is-text.is-disabled:active, 
+.xmv-button--primary.is-link.is-disabled, .xmv-button--primary.is-link.is-disabled:hover, 
+.xmv-button--primary.is-link.is-disabled:focus, .xmv-button--primary.is-link.is-disabled:active {
+    color: var(--xmv-color-primary-light-5);
+    background-color: var(--xmv-color-primary-light-9);
+    border-color: var(--xmv-color-primary-light-8);
+}
+
+.xmv-button--success.is-plain.is-disabled, .xmv-button--success.is-plain.is-disabled:hover, 
+.xmv-button--success.is-plain.is-disabled:focus, .xmv-button--success.is-plain.is-disabled:active, 
+.xmv-button--success.is-text.is-disabled, .xmv-button--success.is-text.is-disabled:hover, 
+.xmv-button--success.is-text.is-disabled:focus, .xmv-button--success.is-text.is-disabled:active, 
+.xmv-button--success.is-link.is-disabled, .xmv-button--success.is-link.is-disabled:hover, 
+.xmv-button--success.is-link.is-disabled:focus, .xmv-button--success.is-link.is-disabled:active {
+    color: var(--xmv-color-success-light-5);
+    background-color: var(--xmv-color-success-light-9);
+    border-color: var(--xmv-color-success-light-8);
+}
+
+.xmv-button--info.is-plain.is-disabled, .xmv-button--info.is-plain.is-disabled:hover, 
+.xmv-button--info.is-plain.is-disabled:focus, .xmv-button--info.is-plain.is-disabled:active, 
+.xmv-button--info.is-text.is-disabled, .xmv-button--info.is-text.is-disabled:hover, 
+.xmv-button--info.is-text.is-disabled:focus, .xmv-button--info.is-text.is-disabled:active, 
+.xmv-button--info.is-link.is-disabled, .xmv-button--info.is-link.is-disabled:hover, 
+.xmv-button--info.is-link.is-disabled:focus, .xmv-button--info.is-link.is-disabled:active {
+    color: var(--xmv-color-info-light-5);
+    background-color: var(--xmv-color-info-light-9);
+    border-color: var(--xmv-color-info-light-8);
+}
+
+.xmv-button--warning.is-plain.is-disabled, .xmv-button--warning.is-plain.is-disabled:hover, 
+.xmv-button--warning.is-plain.is-disabled:focus, .xmv-button--warning.is-plain.is-disabled:active, 
+.xmv-button--warning.is-text.is-disabled, .xmv-button--warning.is-text.is-disabled:hover, 
+.xmv-button--warning.is-text.is-disabled:focus, .xmv-button--warning.is-text.is-disabled:active, 
+.xmv-button--warning.is-link.is-disabled, .xmv-button--warning.is-link.is-disabled:hover, 
+.xmv-button--warning.is-link.is-disabled:focus, .xmv-button--warning.is-link.is-disabled:active {
+    color: var(--xmv-color-warning-light-5);
+    background-color: var(--xmv-color-warning-light-9);
+    border-color: var(--xmv-color-warning-light-8);
+}
+
+.xmv-button--danger.is-plain.is-disabled, .xmv-button--danger.is-plain.is-disabled:hover, 
+.xmv-button--danger.is-plain.is-disabled:focus, .xmv-button--danger.is-plain.is-disabled:active, 
+.xmv-button--danger.is-text.is-disabled, .xmv-button--danger.is-text.is-disabled:hover, 
+.xmv-button--danger.is-text.is-disabled:focus, .xmv-button--danger.is-text.is-disabled:active, 
+.xmv-button--danger.is-link.is-disabled, .xmv-button--danger.is-link.is-disabled:hover, 
+.xmv-button--danger.is-link.is-disabled:focus, .xmv-button--danger.is-link.is-disabled:active {
+    color: var(--xmv-color-danger-light-5);
+    background-color: var(--xmv-color-danger-light-9);
+    border-color: var(--xmv-color-danger-light-8);
+}
+
+.xmv-button-group {
+    display: inline-block;
+    vertical-align: middle;
+    &::before,&::after{
+        display: table;
+        content: "";
+    }
+    &::after{
+        clear: both;
+    }
+}
+
+.xmv-button-group>.xmv-button {
+    float: left;
+    position: relative;
+}
+
+.xmv-button-group>.xmv-button:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.xmv-button-group>.xmv-button:not(:last-child) {
+    margin-right: -1px;
+}
+
+.xmv-button-group>.xmv-button:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+
+.xmv-button-group .xmv-button--primary:not(:first-child):not(:last-child) {
+    border-left-color: var(--xmv-button-divide-border-color);
+    border-right-color: var(--xmv-button-divide-border-color);
+}
+
+.xmv-button-group .xmv-button--primary:first-child {
+    border-right-color: var(--xmv-button-divide-border-color);
+}
+
+.xmv-button-group>.xmv-button+.xmv-button {
+    margin-left: 0;
+}
+
+.xmv-button-group>.xmv-button:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.xmv-button-group .xmv-button--primary:last-child {
+    border-left-color: var(--xmv-button-divide-border-color);
+}

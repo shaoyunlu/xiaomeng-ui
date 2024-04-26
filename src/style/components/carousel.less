@@ -1,0 +1,150 @@
+.xmv-carousel--horizontal, .xmv-carousel--vertical {
+    overflow: hidden;
+}
+
+.xmv-carousel__container {
+    position: relative;
+    height: 300px;
+}
+
+.xmv-carousel__item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    overflow: hidden;
+    z-index: calc(var(--xmv-index-normal) - 1);
+}
+
+.xmv-carousel__item.is-animating {
+    transition: transform .4s ease-in-out;
+}
+
+.xmv-carousel__arrow {
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    height: var(--xmv-carousel-arrow-size);
+    width: var(--xmv-carousel-arrow-size);
+    cursor: pointer;
+    transition: var(--xmv-transition-duration);
+    border-radius: 50%;
+    background-color: var(--xmv-carousel-arrow-background);
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: var(--xmv-carousel-arrow-font-size);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.xmv-carousel__arrow--left {
+    left: 16px;
+}
+
+.xmv-carousel__arrow i {
+    cursor: pointer;
+}
+
+.xmv-carousel__arrow--right {
+    right: 16px;
+}
+
+
+.xmv-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+}
+
+.xmv-carousel__item:nth-child(2n + 1) {
+    background-color: #d3dce6;
+}
+
+.xmv-carousel__indicators {
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+}
+
+.xmv-carousel__indicators--horizontal {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.xmv-carousel__indicator {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.xmv-carousel__indicator--horizontal {
+    display: inline-block;
+    padding: var(--xmv-carousel-indicator-padding-vertical) var(--xmv-carousel-indicator-padding-horizontal);
+}
+
+.xmv-carousel__button {
+    display: block;
+    opacity: .48;
+    width: var(--xmv-carousel-indicator-width);
+    height: var(--xmv-carousel-indicator-height);
+    background-color: #fff;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: var(--xmv-transition-duration);
+}
+
+.xmv-carousel__indicator.is-active button {
+    opacity: 1;
+}
+
+.xmv-carousel__indicators--outside {
+    bottom: calc(var(--xmv-carousel-indicator-height) + var(--xmv-carousel-indicator-padding-vertical) * 2);
+    text-align: center;
+    position: static;
+    transform: none;
+
+    button {
+        background-color: var(--xmv-carousel-indicator-out-color);
+        opacity: .24;
+    }
+}
+
+.xmv-carousel__item--card {
+    width: 50%;
+    transition: transform .4s ease-in-out;
+}
+
+.xmv-carousel__item--card-vertical {
+    width: 100%;
+    height: 50%;
+}
+
+.xmv-carousel__item--card.is-active {
+    z-index: 2;
+}
+
+.xmv-carousel__indicators--vertical {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.xmv-carousel__indicator--vertical {
+    padding: var(--xmv-carousel-indicator-padding-horizontal) var(--xmv-carousel-indicator-padding-vertical);
+}
+
+.xmv-carousel__indicator--vertical .xmv-carousel__button {
+    width: var(--xmv-carousel-indicator-height);
+    height: calc(var(--xmv-carousel-indicator-width) / 2);
+}

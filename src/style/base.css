@@ -1,0 +1,225 @@
+*, :before, :after {
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #0003;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+img {
+    border-style: none;
+    max-width: 100%;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  margin: 0;
+}
+
+
+.xmv-place-span{display: none;}
+
+@keyframes xmv-rotating
+{
+    0% {
+        transform:rotate(0)
+    }
+
+    to {
+        transform:rotate(360deg)
+    }
+}
+@keyframes xmv-loading-dash
+{
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes xmv-loading-dash
+{
+    0% {
+        stroke-dasharray: 1,200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90,150;
+        stroke-dashoffset: -40px;
+    }
+    100% {
+        stroke-dasharray: 90,150;
+        stroke-dashoffset: -120px;
+    }
+}
+
+/** 列表动画 */
+
+.xmv-list-enter-active, .xmv-list-leave-active {
+    transition: all 1s;
+}
+
+.xmv-list-enter-from, .xmv-list-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.xmv-list-leave-active {
+    position: absolute!important;
+}
+
+/** 淡入淡出动画 */
+.xmv-fade-in-enter-active, .xmv-fade-in-leave-active {
+    transition: all var(--xmv-transition-duration) cubic-bezier(.55,0,.1,1);
+}
+
+.xmv-fade-in-enter-from, .xmv-fade-in-leave-active {
+    opacity: 0;
+}
+
+:root{
+    --xmv-color-primary-rgb: 64, 158, 255;
+    --xmv-color-success-rgb: 103, 194, 58;
+    --xmv-color-warning-rgb: 230, 162, 60;
+    --xmv-color-danger-rgb: 245, 108, 108;
+    --xmv-color-error-rgb: 245, 108, 108;
+    --xmv-color-info-rgb: 144, 147, 153;
+    --xmv-font-size-extra-large: 20px;
+    --xmv-font-size-large: 18px;
+    --xmv-font-size-medium: 16px;
+    --xmv-font-size-base: 14px;
+    --xmv-font-size-small: 13px;
+    --xmv-font-size-extra-small: 12px;
+    --xmv-font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
+    --xmv-font-weight-primary: 500;
+    --xmv-font-line-height-primary: 24px;
+    --xmv-index-normal: 1;
+    --xmv-index-top: 1000;
+    --xmv-index-popper: 2000;
+    --xmv-border-radius-base: 4px;
+    --xmv-border-radius-small: 2px;
+    --xmv-border-radius-round: 20px;
+    --xmv-border-radius-circle: 100%;
+    --xmv-transition-duration: .3s;
+    --xmv-transition-duration-fast: .2s;
+    --xmv-transition-function-ease-in-out-bezier: cubic-bezier(.645, .045, .355, 1);
+    --xmv-transition-function-fast-bezier: cubic-bezier(.23, 1, .32, 1);
+    --xmv-transition-all: all var(--xmv-transition-duration) var(--xmv-transition-function-ease-in-out-bezier);
+    --xmv-transition-fade: opacity var(--xmv-transition-duration) var(--xmv-transition-function-fast-bezier);
+    --xmv-transition-md-fade: transform var(--xmv-transition-duration) var(--xmv-transition-function-fast-bezier), opacity var(--xmv-transition-duration) var(--xmv-transition-function-fast-bezier);
+    --xmv-transition-fade-linear: opacity var(--xmv-transition-duration-fast) linear;
+    --xmv-transition-border: border-color var(--xmv-transition-duration-fast) var(--xmv-transition-function-ease-in-out-bezier);
+    --xmv-transition-box-shadow: box-shadow var(--xmv-transition-duration-fast) var(--xmv-transition-function-ease-in-out-bezier);
+    --xmv-transition-color: color var(--xmv-transition-duration-fast) var(--xmv-transition-function-ease-in-out-bezier);
+    --xmv-component-size-large: 40px;
+    --xmv-component-size: 32px;
+    --xmv-component-size-small: 24px;
+
+    --xmv-color-white: #ffffff;
+    --xmv-color-black: #000000;
+    --xmv-color-primary: #409eff;
+    --xmv-color-primary-light-3: #79bbff;
+    --xmv-color-primary-light-5: #a0cfff;
+    --xmv-color-primary-light-7: #c6e2ff;
+    --xmv-color-primary-light-8: #d9ecff;
+    --xmv-color-primary-light-9: #ecf5ff;
+    --xmv-color-primary-dark-2: #337ecc;
+    --xmv-color-success: #67c23a;
+    --xmv-color-success-light-3: #95d475;
+    --xmv-color-success-light-5: #b3e19d;
+    --xmv-color-success-light-7: #d1edc4;
+    --xmv-color-success-light-8: #e1f3d8;
+    --xmv-color-success-light-9: #f0f9eb;
+    --xmv-color-success-dark-2: #529b2e;
+    --xmv-color-warning: #e6a23c;
+    --xmv-color-warning-light-3: #eebe77;
+    --xmv-color-warning-light-5: #f3d19e;
+    --xmv-color-warning-light-7: #f8e3c5;
+    --xmv-color-warning-light-8: #faecd8;
+    --xmv-color-warning-light-9: #fdf6ec;
+    --xmv-color-warning-dark-2: #b88230;
+    --xmv-color-danger: #f56c6c;
+    --xmv-color-danger-light-3: #f89898;
+    --xmv-color-danger-light-5: #fab6b6;
+    --xmv-color-danger-light-7: #fcd3d3;
+    --xmv-color-danger-light-8: #fde2e2;
+    --xmv-color-danger-light-9: #fef0f0;
+    --xmv-color-danger-dark-2: #c45656;
+    --xmv-color-error: #f56c6c;
+    --xmv-color-error-light-3: #f89898;
+    --xmv-color-error-light-5: #fab6b6;
+    --xmv-color-error-light-7: #fcd3d3;
+    --xmv-color-error-light-8: #fde2e2;
+    --xmv-color-error-light-9: #fef0f0;
+    --xmv-color-error-dark-2: #c45656;
+    --xmv-color-info: #909399;
+    --xmv-color-info-light-3: #b1b3b8;
+    --xmv-color-info-light-5: #c8c9cc;
+    --xmv-color-info-light-7: #dedfe0;
+    --xmv-color-info-light-8: #e9e9eb;
+    --xmv-color-info-light-9: #f4f4f5;
+    --xmv-color-info-dark-2: #73767a;
+    --xmv-bg-color: #ffffff;
+    --xmv-bg-color-page: #f2f3f5;
+    --xmv-bg-color-overlay: #ffffff;
+    --xmv-text-color-primary: #303133;
+    --xmv-text-color-regular: #606266;
+    --xmv-text-color-secondary: #909399;
+    --xmv-text-color-placeholder: #a8abb2;
+    --xmv-text-color-disabled: #c0c4cc;
+    --xmv-border-color: #dcdfe6;
+    --xmv-border-color-light: #e4e7ed;
+    --xmv-border-color-lighter: #ebeef5;
+    --xmv-border-color-extra-light: #f2f6fc;
+    --xmv-border-color-dark: #d4d7de;
+    --xmv-border-color-darker: #cdd0d6;
+    --xmv-fill-color: #f0f2f5;
+    --xmv-fill-color-light: #f5f7fa;
+    --xmv-fill-color-lighter: #fafafa;
+    --xmv-fill-color-extra-light: #fafcff;
+    --xmv-fill-color-dark: #ebedf0;
+    --xmv-fill-color-darker: #e6e8eb;
+    --xmv-fill-color-blank: #ffffff;
+    --xmv-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, .04), 0px 8px 20px rgba(0, 0, 0, .08);
+    --xmv-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, .12);
+    --xmv-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, .12);
+    --xmv-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, .08), 0px 12px 32px rgba(0, 0, 0, .12), 0px 8px 16px -8px rgba(0, 0, 0, .16);
+    --xmv-disabled-bg-color: var(--xmv-fill-color-light);
+    --xmv-disabled-text-color: var(--xmv-text-color-placeholder);
+    --xmv-disabled-border-color: var(--xmv-border-color-light);
+    --xmv-overlay-color: rgba(0, 0, 0, .8);
+    --xmv-overlay-color-light: rgba(0, 0, 0, .7);
+    --xmv-overlay-color-lighter: rgba(0, 0, 0, .5);
+    --xmv-mask-color: rgba(255, 255, 255, .9);
+    --xmv-mask-color-extra-light: rgba(255, 255, 255, .3);
+    --xmv-border-width: 1px;
+    --xmv-border-style: solid;
+    --xmv-border-color-hover: var(--xmv-text-color-disabled);
+    --xmv-border: var(--xmv-border-width) var(--xmv-border-style) var(--xmv-border-color);
+    --xmv-svg-monochrome-grey: var(--xmv-border-color);
+
+    --xmv-loading-spinner-size: 42px;
+    --xmv-loading-fullscreen-spinner-size: 50px;
+}
+
+[class*=" xmv-icon"], [class^=xmv-icon] {
+    --color: inherit;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    fill: currentColor;
+    color: var(--color);
+    font-size: inherit;
+}

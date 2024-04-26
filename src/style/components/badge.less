@@ -1,0 +1,49 @@
+.xmv-badge__content {
+    background-color: var(--xmv-badge-bg-color);
+    border-radius: var(--xmv-badge-radius);
+    color: var(--xmv-color-white);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--xmv-badge-font-size);
+    height: var(--xmv-badge-size);
+    padding: 0 var(--xmv-badge-padding);
+    white-space: nowrap;
+    border: 1px solid var(--xmv-bg-color);
+}
+
+.xmv-badge__content--danger {
+    background-color: var(--xmv-color-danger);
+}
+
+.xmv-badge__content--primary {
+    background-color: var(--xmv-color-primary);
+}
+
+.xmv-badge__content--warning {
+    background-color: var(--xmv-color-warning);
+}
+
+.xmv-badge__content.is-fixed {
+    position: absolute;
+    top: 0;
+    right: calc(1px + var(--xmv-badge-size) / 2);
+    transform: translateY(-50%) translate(100%);
+    z-index: var(--xmv-index-normal);
+}
+
+.xmv-badge__content.is-empty{
+    display: none;
+}
+
+.xmv-badge__content.is-dot {
+    height: 8px;
+    width: 8px;
+    padding: 0;
+    right: 0;
+    border-radius: 50%;
+}
+
+.xmv-badge__content.is-fixed.is-dot {
+    right: 5px;
+}

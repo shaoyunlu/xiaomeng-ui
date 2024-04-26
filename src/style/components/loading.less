@@ -1,0 +1,41 @@
+.xmv-loading-mask {
+    position: absolute;
+    z-index: 2000;
+    background-color: var(--xmv-mask-color);
+    margin: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: opacity var(--xmv-transition-duration);
+}
+
+.xmv-loading-spinner {
+    top: 50%;
+    margin-top: calc((0px - var(--xmv-loading-spinner-size)) / 2);
+    width: 100%;
+    text-align: center;
+    position: absolute;
+}
+
+.xmv-loading-spinner .circular {
+    display: inline;
+    height: var(--xmv-loading-spinner-size);
+    width: var(--xmv-loading-spinner-size);
+    animation: loading-rotate 2s linear infinite;
+}
+
+.xmv-loading-spinner .path {
+    animation: xmv-loading-dash 1.5s ease-in-out infinite;
+    stroke-dasharray: 90,150;
+    stroke-dashoffset: 0;
+    stroke-width: 2;
+    stroke: var(--xmv-color-primary);
+    stroke-linecap: round;
+}
+
+.xmv-loading-spinner .xmv-loading-text {
+    color: var(--xmv-color-primary);
+    margin: 3px 0;
+    font-size: 14px;
+}

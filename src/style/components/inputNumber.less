@@ -1,0 +1,124 @@
+.xmv-input-number {
+    position: relative;
+    display: inline-flex;
+    width: 150px;
+    line-height: 30px;
+}
+
+.xmv-input-number.is-disabled .xmv-input-number__increase,
+.xmv-input-number.is-disabled .xmv-input-number__decrease {
+    border-color: var(--xmv-disabled-border-color);
+    color: var(--xmv-disabled-border-color);
+}
+
+.xmv-input-number__increase, .xmv-input-number__decrease {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    position: absolute;
+    z-index: 1;
+    top: 1px;
+    bottom: 1px;
+    width: 32px;
+    background: var(--xmv-fill-color-light);
+    color: var(--xmv-text-color-regular);
+    cursor: pointer;
+    font-size: 13px;
+    user-select: none;
+}
+
+.xmv-input-number__decrease {
+    left: 1px;
+    border-radius: var(--xmv-border-radius-base) 0 0 var(--xmv-border-radius-base);
+    border-right: var(--xmv-border);
+}
+
+.xmv-input-number__increase {
+    right: 1px;
+    border-radius: 0 var(--xmv-border-radius-base) var(--xmv-border-radius-base) 0;
+    border-left: var(--xmv-border);
+}
+
+.xmv-input-number__increase.is-disabled, .xmv-input-number__decrease.is-disabled {
+    color: var(--xmv-disabled-text-color);
+    cursor: not-allowed;
+}
+
+.xmv-input-number .xmv-input__wrapper {
+    padding-left: 42px;
+    padding-right: 42px;
+}
+
+.xmv-input-number .xmv-input__inner {
+    text-align: center;
+    line-height: 1;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    -moz-focusring: none;
+}
+
+.xmv-input-number--small {
+    width: 120px;
+    line-height: 22px;
+}
+
+.xmv-input-number--small .xmv-input-number__increase,
+.xmv-input-number--small .xmv-input-number__decrease {
+    width: 24px;
+    font-size: 12px;
+}
+
+.xmv-input-number--large {
+    width: 180px;
+    line-height: 38px;
+}
+
+.xmv-input-number--large .xmv-input-number__increase,
+.xmv-input-number--large .xmv-input-number__decrease {
+    width: 40px;
+    font-size: 14px;
+}
+
+.xmv-input-number.is-controls-right[class*=large] [class*=increase],
+.xmv-input-number.is-controls-right[class*=large] [class*=decrease] {
+    --xmv-input-number-controls-height: 19px;
+}
+
+.xmv-input-number.is-controls-right[class*=small] [class*=increase],
+.xmv-input-number.is-controls-right[class*=small] [class*=decrease] {
+    --xmv-input-number-controls-height: 11px;
+}
+
+.xmv-input-number.is-controls-right .xmv-input-number__increase,
+.xmv-input-number.is-controls-right .xmv-input-number__decrease {
+    --xmv-input-number-controls-height: 15px;
+    height: var(--xmv-input-number-controls-height);
+    line-height: var(--xmv-input-number-controls-height);
+}
+
+.xmv-input-number.is-controls-right .xmv-input-number__decrease {
+    right: 1px;
+    top: auto;
+    left: auto;
+    border-right: none;
+    border-left: var(--xmv-border);
+    border-radius: 0 0 var(--xmv-border-radius-base) 0;
+}
+
+.xmv-input-number.is-controls-right .xmv-input-number__increase {
+    bottom: auto;
+    left: auto;
+    border-radius: 0 var(--xmv-border-radius-base) 0 0;
+    border-bottom: var(--xmv-border);
+}
+
+.xmv-input-number.is-controls-right .xmv-input-number__increase [class*=xmv-icon], 
+.xmv-input-number.is-controls-right .xmv-input-number__decrease [class*=xmv-icon] {
+    transform: scale(.8);
+}
+
+.xmv-input-number.is-controls-right .xmv-input__wrapper {
+    padding-left: 15px;
+    padding-right: 42px;
+}

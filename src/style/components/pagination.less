@@ -1,0 +1,160 @@
+.xmv-pagination button {
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--xmv-pagination-font-size);
+    min-width: var(--xmv-pagination-button-width);
+    height: var(--xmv-pagination-button-height);
+    line-height: var(--xmv-pagination-button-height);
+    color: var(--xmv-pagination-button-color);
+    background: var(--xmv-pagination-bg-color);
+    padding: 0 4px;
+    border: none;
+    border-radius: var(--xmv-pagination-border-radius);
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+
+    &:hover {
+        color: var(--xmv-pagination-hover-color);
+    }
+}
+
+.xmv-pagination>*.is-first {
+    margin-left: 0!important;
+}
+
+.xmv-pagination>*.is-last {
+    margin-right: 0!important;
+}
+
+.xmv-pagination .btn-prev {
+    margin-left: var(--xmv-pagination-item-gap);
+}
+
+.xmv-pagination button:disabled, .xmv-pagination button.is-disabled {
+    color: var(--xmv-pagination-button-disabled-color);
+    background-color: var(--xmv-pagination-button-disabled-bg-color);
+    cursor: not-allowed;
+}
+
+.xmv-pager {
+    user-select: none;
+    list-style: none;
+    font-size: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.xmv-pager li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--xmv-pagination-font-size);
+    min-width: var(--xmv-pagination-button-width);
+    height: var(--xmv-pagination-button-height);
+    line-height: var(--xmv-pagination-button-height);
+    color: var(--xmv-pagination-button-color);
+    background: var(--xmv-pagination-bg-color);
+    padding: 0 4px;
+    border: none;
+    border-radius: var(--xmv-pagination-border-radius);
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+
+    &.is-active {
+        color: var(--xmv-pagination-hover-color);
+        cursor: default;
+        font-weight: 700;
+    }
+}
+
+.xmv-pager li * {
+    pointer-events: none;
+}
+
+.xmv-pagination.is-total-zero{
+    display: none;
+}
+
+.xmv-pagination.is-background .btn-prev {
+    margin-left: var(--xmv-pagination-item-gap);
+}
+
+.xmv-pagination.is-background .btn-prev, 
+.xmv-pagination.is-background .btn-next, 
+.xmv-pagination.is-background .xmv-pager li {
+    margin: 0 4px;
+    background-color: var(--xmv-pagination-button-bg-color);
+}
+
+.xmv-pagination.is-background .btn-prev:disabled, 
+.xmv-pagination.is-background .btn-prev.is-disabled, 
+.xmv-pagination.is-background .btn-next:disabled, 
+.xmv-pagination.is-background .btn-next.is-disabled, 
+.xmv-pagination.is-background .xmv-pager li:disabled, 
+.xmv-pagination.is-background .xmv-pager li.is-disabled {
+    color: var(--xmv-text-color-placeholder);
+    background-color: var(--xmv-disabled-bg-color);
+}
+
+.xmv-pagination.is-background .btn-prev.is-active, 
+.xmv-pagination.is-background .btn-next.is-active, 
+.xmv-pagination.is-background .xmv-pager li.is-active {
+    background-color: var(--xmv-color-primary);
+    color: var(--xmv-color-white);
+}
+
+.xmv-pagination--small .btn-prev, 
+.xmv-pagination--small .btn-next, 
+.xmv-pagination--small .xmv-pager li {
+    height: var(--xmv-pagination-button-height-small);
+    line-height: var(--xmv-pagination-button-height-small);
+    font-size: var(--xmv-pagination-font-size-small);
+    min-width: var(--xmv-pagination-button-width-small);
+}
+
+.xmv-pagination__jump {
+    display: flex;
+    align-items: center;
+    margin-left: var(--xmv-pagination-item-gap);
+    font-weight: 400;
+    color: var(--xmv-text-color-regular);
+}
+
+.xmv-pagination__goto {
+    margin-right: 8px;
+}
+
+.xmv-pagination__editor {
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.xmv-pagination__editor.xmv-input {
+    width: 56px;
+}
+
+.xmv-pagination .xmv-input__inner {
+    text-align: center;
+    -moz-appearance: textfield;
+}
+
+.xmv-pagination__classifier {
+    margin-left: 8px;
+}
+
+.xmv-pagination__sizes,
+.xmv-pagination__total {
+    margin-left: var(--xmv-pagination-item-gap);
+    font-weight: 400;
+    color: var(--xmv-text-color-regular);
+}
+
+.xmv-pagination .xmv-select .xmv-input {
+    width: 128px;
+}

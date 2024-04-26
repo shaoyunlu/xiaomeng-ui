@@ -1,0 +1,25 @@
+.xmv-popper {
+    position: absolute;
+    border-radius: var(--xmv-popper-border-radius);
+    padding: 5px 11px;
+    z-index: 2000;
+    font-size: 12px;
+    line-height: 20px;
+    min-width: 10px;
+    word-wrap: break-word;
+    visibility: visible;
+    &.is-dark{
+        color: var(--xmv-bg-color);
+        background: var(--xmv-text-color-primary);
+        border: 1px solid var(--xmv-text-color-primary);
+    }
+
+    &.is-light {
+        background: var(--xmv-bg-color-overlay);
+        border: 1px solid var(--xmv-border-color-light);
+    }
+
+    &.is-pure {
+        padding: 0;
+    }
+}

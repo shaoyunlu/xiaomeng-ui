@@ -1,0 +1,124 @@
+
+.xmv-time-panel {
+    border-radius: 2px;
+    position: relative;
+    width: 180px;
+    left: 0;
+    z-index: var(--xmv-index-top);
+    user-select: none;
+    box-sizing: content-box;
+}
+
+.xmv-time-panel__content {
+    font-size: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.xmv-time-panel__content:after, .xmv-time-panel__content:before {
+    content: "";
+    top: 50%;
+    position: absolute;
+    margin-top: -16px;
+    height: 32px;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding-top: 6px;
+    text-align: left;
+}
+
+.xmv-time-panel__content:before {
+    padding-left: 50%;
+    margin-right: 12%;
+    margin-left: 12%;
+    border-top: 1px solid var(--xmv-border-color-light);
+    border-bottom: 1px solid var(--xmv-border-color-light);
+}
+
+.xmv-time-panel__content:after {
+    left: 50%;
+    margin-left: 12%;
+    margin-right: 12%;
+}
+
+.xmv-time-panel__content.has-seconds:before {
+    padding-left: 33.3333333333%;
+}
+
+.xmv-time-panel__content.has-seconds:after {
+    left: 66.6666666667%;
+}
+
+.xmv-time-spinner {
+    width: 100%;
+    white-space: nowrap;
+}
+
+.xmv-time-spinner__wrapper {
+    height: 192px;
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    position: relative;
+}
+
+.xmv-time-spinner.has-seconds .xmv-time-spinner__wrapper {
+    width: 33.3%;
+}
+
+.xmv-time-spinner__item {
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    color: var(--xmv-text-color-regular);
+}
+
+.xmv-time-spinner__item.is-disabled {
+    color: var(--xmv-text-color-placeholder);
+    cursor: not-allowed;
+}
+
+.xmv-time-spinner__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.xmv-time-spinner__list:after, .xmv-time-spinner__list:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 80px;
+}
+
+.xmv-time-spinner__item:hover:not(.is-disabled):not(.is-active) {
+    background: var(--xmv-fill-color-light);
+    cursor: pointer;
+}
+
+.xmv-time-spinner__item.is-active:not(.is-disabled) {
+    color: var(--xmv-text-color-primary);
+    font-weight: 700;
+}
+
+.xmv-time-panel-range{
+    display: flex;
+    width: 340px;
+    margin: 10px;
+}
+
+.xmv-time-panel-range .cell{
+    border-radius: 2px;
+    border: 1px solid var(--xmv-disabled-border-color);
+}
+
+.xmv-time-panel-range .cell:first-child{
+    margin-right: 20px;
+}
+
+.xmv-time-panel-range .cell{
+    width: 155px;;
+}

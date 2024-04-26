@@ -1,0 +1,285 @@
+.xmv-table {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    height: fit-content;
+    width: 100%;
+    max-width: 100%;
+    background-color: var(--xmv-table-bg-color);
+    font-size: 14px;
+    color: var(--xmv-table-text-color);
+
+    .caret-wrapper {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        height: 14px;
+        width: 24px;
+        vertical-align: middle;
+        cursor: pointer;
+        overflow: initial;
+        position: relative;
+    }
+
+    .sort-caret {
+        width: 0;
+        height: 0;
+        border: solid 5px transparent;
+        position: absolute;
+        left: 7px;
+    }
+
+    .sort-caret.ascending {
+        border-bottom-color: var(--xmv-text-color-placeholder);
+        top: -5px;
+    }
+
+    .sort-caret.descending {
+        border-top-color: var(--xmv-text-color-placeholder);
+        bottom: -3px;
+    }
+
+    .ascending .sort-caret.ascending {
+        border-bottom-color: var(--xmv-color-primary);
+    }
+
+    .descending .sort-caret.descending {
+        border-top-color: var(--xmv-color-primary);
+    }
+
+    th.xmv-table__cell.is-sortable {
+        cursor: pointer;
+    }
+
+    .xmv-scrollbar__bar.is-vertical,
+    .xmv-scrollbar__bar.is-horizontal{
+        z-index: 3;
+    }
+}
+
+.xmv-table--fit {
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.xmv-table__inner-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.xmv-table--border:after, .xmv-table--border:before, 
+.xmv-table--border .xmv-table__inner-wrapper:after, .xmv-table__inner-wrapper:before {
+    content: "";
+    position: absolute;
+    background-color: var(--xmv-table-border-color);
+    z-index: 3;
+}
+
+.xmv-table--border:before {
+    top: -1px;
+    left: 0;
+    width: 1px;
+    height: 100%;
+}
+
+.xmv-table--border:after {
+    top: -1px;
+    right: 0;
+    width: 1px;
+    height: 100%;
+}
+
+.xmv-table__inner-wrapper:before {
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    height: 1px;
+}
+
+.xmv-table--border .xmv-table__inner-wrapper:after {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+}
+
+.xmv-table--border .xmv-table__cell {
+    border-right: var(--xmv-table-border);
+}
+
+.xmv-table--striped .xmv-table__body .xmv-table__row--striped td.xmv-table__cell {
+    background: var(--xmv-fill-color-light);
+}
+
+.xmv-table .hidden-columns {
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.xmv-table__header-wrapper, .xmv-table__body-wrapper, .xmv-table__footer-wrapper {
+    width: 100%;
+}
+
+.xmv-table__header-wrapper {
+    flex-shrink: 0;
+}
+
+.xmv-table__header-wrapper, .xmv-table__footer-wrapper {
+    overflow: hidden;
+}
+
+.xmv-table__header, .xmv-table__body, .xmv-table__footer {
+    table-layout: fixed;
+    border-collapse: separate;
+}
+
+.xmv-table thead {
+    color: var(--xmv-table-header-text-color);
+    font-weight: 500;
+}
+
+.xmv-table tr {
+    position: relative;
+    background-color: var(--xmv-table-tr-bg-color);
+
+}
+
+.xmv-table tr.xmv-table__row--drag-middle{
+    background-color: #afe1db;
+}
+
+.xmv-table__row--drag-up{
+    background-image: linear-gradient(to bottom, #afe1db, rgba(175, 225, 219, 0) 30%); 
+}
+
+.xmv-table__row--drag-bottom{
+    background-image: linear-gradient(to top, #afe1db, rgba(175, 225, 219, 0) 30%);
+}
+
+
+
+.xmv-table .xmv-table__cell {
+    padding: 8px 0;
+    min-width: 0;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    position: relative;
+    text-align: left;
+    z-index: 1;
+
+    &.xmv-table-fixed-column--left ,
+    &.xmv-table-fixed-column--right{
+        position: sticky!important;
+        z-index: 2;
+        background: var(--xmv-bg-color);
+        border-right: none;
+        &::before{
+            content: "";
+            position: absolute;
+            top: 0px;
+            width: 10px;
+            bottom: -1px;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            box-shadow: none;
+            touch-action: none;
+            pointer-events: none;
+        }
+    }
+
+    &.xmv-table-fixed-column--left{
+        left : 0;
+        &::before{
+            right: -10px;
+        }
+    }
+    &.xmv-table-fixed-column--right{
+        right : 0;
+        &::before{
+            left: -10px;
+        }
+    }
+
+    .cell.xmv-tooltip{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.xmv-table.is-scrolling-middle .xmv-table-fixed-column--left,
+.xmv-table.is-scrolling-right .xmv-table-fixed-column--left{
+    &::before{
+        box-shadow: var(--xmv-table-fixed-left-column);
+    }
+}
+
+.xmv-table.is-scrolling-middle .xmv-table-fixed-column--right,
+.xmv-table.is-scrolling-left .xmv-table-fixed-column--right{
+    &::before{
+        box-shadow: var(--xmv-table-fixed-right-column);
+    }
+}
+
+.xmv-table th.xmv-table__cell,
+.xmv-table td.xmv-table__cell {
+    border-bottom: var(--xmv-table-border);
+}
+
+.xmv-table .cell {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-all;
+    line-height: 23px;
+    padding: 0 12px;
+}
+
+.xmv-table__body-wrapper {
+    overflow: hidden;
+    position: relative;
+    flex: 1;
+}
+
+.xmv-table__body tr:hover{
+    >td.xmv-table__cell{
+        transition: background-color .25s ease;
+        background-color: var(--xmv-table-row-hover-bg-color);
+    }
+}
+
+.xmv-table__body tr.current-row>td.xmv-table__cell {
+    background-color: var(--xmv-table-current-row-bg-color);
+}
+
+.xmv-table__expand-icon {
+    position: relative;
+    cursor: pointer;
+    color: var(--xmv-text-color-regular);
+    font-size: 12px;
+    transition: transform var(--xmv-transition-duration-fast) ease-in-out;
+    height: 20px;
+}
+
+.xmv-table__expand-icon--expanded {
+    transform: rotate(90deg);
+}
+
+.xmv-table  .xmv-table__expand-icon {
+    display: inline-block;
+    width: 12px;
+    line-height: 12px;
+    height: 12px;
+    text-align: center;
+    margin-right: 8px;
+}
+
+.xmv-table__placeholder {
+    display: inline-block;
+    width: 20px;
+}

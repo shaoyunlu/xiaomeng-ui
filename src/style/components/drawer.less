@@ -1,0 +1,118 @@
+.xmv-drawer {
+    position: absolute;
+    box-sizing: border-box;
+    background-color: var(--xmv-drawer-bg-color);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--xmv-box-shadow-dark);
+    overflow: hidden;
+    transition: all var(--xmv-transition-duration);
+}
+
+.xmv-drawer.ltr, .xmv-drawer.rtl {
+    height: 100%;
+    top: 0;
+    bottom: 0;
+}
+
+.xmv-drawer.ttb, .xmv-drawer.btt {
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.el-drawer.ltr {
+    left: 0;
+}
+
+.xmv-drawer.rtl {
+    right: 0;
+}
+
+.xmv-drawer.ttb {
+    top: 0;
+}
+
+.xmv-drawer.btt {
+    bottom: 0;
+}
+
+.xmv-drawer__header {
+    align-items: center;
+    color: #72767b;
+    display: flex;
+    margin-bottom: 32px;
+    padding: var(--xmv-drawer-padding-primary);
+    padding-bottom: 0;
+}
+
+.xmv-drawer__title {
+    margin: 0;
+    flex: 1;
+    line-height: inherit;
+    font-size: 1rem;
+}
+
+.xmv-drawer__header>:first-child {
+    flex: 1;
+}
+
+.xmv-drawer__close-btn {
+    display: inline-flex;
+    border: none;
+    cursor: pointer;
+    font-size: var(--xmv-font-size-extra-large);
+    color: inherit;
+    background-color: transparent;
+    outline: none;
+}
+
+.xmv-drawer__body {
+    flex: 1;
+    padding: var(--xmv-drawer-padding-primary);
+    overflow: auto;
+}
+
+.xmv-drawer__body>* {
+    box-sizing: border-box;
+}
+
+.xmv-drawer-enter-active, .xmv-drawer-leave-active {
+    transition: all var(--xmv-transition-duration);
+}
+
+.xmv-drawer-enter-from, .xmv-drawer-enter-active, 
+.xmv-drawer-enter-to, .xmv-drawer-leave-from, 
+.xmv-drawer-leave-active, .xmv-drawer-leave-to {
+    overflow: hidden!important;
+}
+
+.xmv-drawer-enter-from ,.xmv-drawer-leave-to {
+    opacity: 0;
+    .xmv-drawer.ltr{
+        transform: translateX(-100%);
+    }
+    .xmv-drawer.rtl{
+        transform: translateX(100%);
+    }
+    .xmv-drawer.ttb{
+        transform: translateY(-100%);
+    }
+    .xmv-drawer.btt{
+        transform: translateY(100%);
+    }
+}
+
+.xmv-drawer-enter-to {
+    opacity: 1;
+}
+
+.xmv-drawer-leave-from {
+    opacity: 1;
+}
+
+.xmv-drawer__footer {
+    padding: var(--xmv-drawer-padding-primary);
+    padding-top: 10px;
+    text-align: right;
+}
