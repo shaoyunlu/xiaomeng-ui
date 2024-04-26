@@ -17,3 +17,11 @@ npm install xiaomeng-ui
 ```
 
 ## 项目中使用
+```bash
+......
+import register from 'xiaomeng-vue-ui'
+import 'xiaomeng-vue-ui/dist/xmv-ui.css'
+const app = createApp(App)
+app.use(register)
+......
+```
