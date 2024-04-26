@@ -4,7 +4,7 @@
 
 import { createApp } from "vue";
 import App from './app.vue'
-import register from '../xmv-entry'
+import register from '../xmv-ui'
 import 'style/app.less'
 
 

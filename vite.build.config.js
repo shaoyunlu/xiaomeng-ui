@@ -26,7 +26,7 @@ export default defineConfig({
             },
     build: {
               lib: {
-                entry: path.resolve(__dirname, 'xmv-entry.js'),
+                entry: path.resolve(__dirname, 'xmv-ui.js'),
                 name: 'XmvUI'
               },
               cssCodeSplit:true,
@@ -36,7 +36,14 @@ export default defineConfig({
                 output: {
                   // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
                   globals: {
-                    vue: 'Vue'
+                    vue: 'Vue',
+                    // 自定义静态资源文件名
+                    assetFileNames: (assetInfo) => {
+                      if (assetInfo.name.endsWith('.css')) {
+                        return 'xmv-ui';  // 这里设置你想要的CSS文件名
+                      }
+                      return assetInfo.name;
+                    }
                   }
                 }
               },
