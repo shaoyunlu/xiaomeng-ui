@@ -67,6 +67,9 @@ import xmvDropdownItem from 'comps/dropdown/dropdownItem.vue'
 import xmvPageHeader from 'comps/pageHeader/pageHeader.vue'
 import xmvAlert from 'comps/alert/alert.vue'
 import xmvWatermark from 'comps/watermark/watermark.vue'
+import xmvPageRoam from 'comps/pageroam/pageroam.vue'
+import xmvPageRoamList from 'comps/pageroam/pageroamlist.vue'
+import xmvPageRoamItem from 'comps/pageroam/pageroamitem.vue'
 
 import loadingDirective from 'comps/loading/directive'
 import clickoutsideDirective from 'directives/clickoutside.js'
@@ -173,6 +176,9 @@ const register = (vue)=>{
     vue.component('xmvPageHeader' ,xmvPageHeader)
     vue.component('xmvAlert' ,xmvAlert)
     vue.component('xmvWatermark' ,xmvWatermark)
+    vue.component('xmvPageRoam' ,xmvPageRoam)
+    vue.component('xmvPageRoamList' ,xmvPageRoamList)
+    vue.component('xmvPageRoamItem' ,xmvPageRoamItem)
 
     vue.directive('loading', loadingDirective);
     vue.directive('clickoutside', clickoutsideDirective);
