@@ -35,7 +35,11 @@ export default defineComponent({
             let parentOffsetTop = parentBdr.top
             let list = mode.contentElRef.value.querySelectorAll('a[url]')
             for(let i=0;i<list.length;i++){
-                arr.push({index:i,value:list[i].offsetTop + parentOffsetTop - mode.topValue,url:list[i].getAttribute('url')})
+                arr.push({
+                            index:i,
+                            value:list[i].offsetTop + parentOffsetTop - mode.topValue,
+                            type:list[i].getAttribute('a-type'),
+                            url:list[i].getAttribute('url')})
             }
             let minPositiveValueObject = arr.reduce((min, current) => {
                 // 检查 current.value 是否是正数，并且（当前没有最小值或者 current.value 小于 min.value）
