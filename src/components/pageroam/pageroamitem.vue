@@ -25,8 +25,14 @@ export default defineComponent({
         let listSlot = context.slots.list ? context.slots.list({ props }) : null;
 
         const handleClick = ()=>{
-            let dom = mode.contentElRef.value.querySelector('[url="#'+props.title+'"]') 
-            dom.scrollIntoView({ behavior: 'smooth' });
+            let dom = mode.contentElRef.value.querySelector('[url="#'+props.title+'"]')
+            let bdr = dom.getBoundingClientRect()
+            console.log(bdr.top + window.scrollY)
+            window.scrollTo({
+                top: bdr.top + window.scrollY - mode.topValue,
+                behavior: 'smooth'
+            });
+            //dom.scrollIntoView({ behavior: 'smooth' });
             $emit('itemClick' ,props.title)
         }
 

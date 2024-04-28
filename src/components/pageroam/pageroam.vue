@@ -8,9 +8,13 @@ import {createEventBus,debounce} from 'utils/event'
 import PageroamMode from './mode/pageroamMode.js'
 export default defineComponent({
     name:"xmvPageRoam",
+    props:{
+        topValue : {type : Number,default : 0}
+    },
     setup(props ,context) {
 
         const mode = new PageroamMode()
+        mode.topValue = props.topValue
 
         const contentElRef = ref(null)
 
@@ -31,7 +35,7 @@ export default defineComponent({
             let parentOffsetTop = parentBdr.top
             let list = mode.contentElRef.value.querySelectorAll('a[url]')
             for(let i=0;i<list.length;i++){
-                arr.push({index:i,value:list[i].offsetTop + parentOffsetTop,url:list[i].getAttribute('url')})
+                arr.push({index:i,value:list[i].offsetTop + parentOffsetTop - mode.topValue,url:list[i].getAttribute('url')})
             }
             let minPositiveValueObject = arr.reduce((min, current) => {
                 // 检查 current.value 是否是正数，并且（当前没有最小值或者 current.value 小于 min.value）

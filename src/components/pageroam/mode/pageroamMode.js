@@ -6,6 +6,7 @@ class PageroamMode {
             list : []
         })
         this.contentElRef
+        this.topValue
     }
 }
 
