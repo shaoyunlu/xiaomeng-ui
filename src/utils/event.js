@@ -49,6 +49,7 @@ export function createEventBus(eventBus){
     return {$on ,$emit ,$remove}
 }
 
+// 防抖函数
 export function debounce(func, delay) {
     let timeoutId
     return function(...args) {
