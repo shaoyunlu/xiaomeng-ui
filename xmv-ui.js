@@ -88,7 +88,7 @@ const register = (vue)=>{
         listeners : {}
     })
 
-    const {$on ,$emit} = createEventBus(eventBus)
+    const {$on ,$emit ,$remove} = createEventBus(eventBus)
 
     // 创建一个xmv-popper-container
     const popperContainerDiv = document.createElement('div')
@@ -98,6 +98,7 @@ const register = (vue)=>{
     provide('Xmv-Dom-PopperContainer' ,popperContainerDiv)
     provide('Xmv-Event-Emit' ,$emit)
     provide('Xmv-Event-On' ,$on)
+    provide('Xmv-Event-Remove' ,$remove)
     provide('Xmv-Bubbling' ,{status : true})
 
     // 分发各种事件

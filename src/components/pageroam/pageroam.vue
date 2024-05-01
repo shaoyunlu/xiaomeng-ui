@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {defineComponent, h ,provide,renderSlot ,ref, onMounted ,reactive ,inject} from 'vue'
+import {defineComponent, h ,provide,renderSlot ,ref, onMounted ,reactive ,inject, onUnmounted} from 'vue'
 import {createEventBus,debounce} from 'utils/event'
 import PageroamMode from './mode/pageroamMode.js'
 export default defineComponent({
@@ -28,8 +28,9 @@ export default defineComponent({
         provide('PageroamMode' ,mode)
 
         const xmvOn = inject('Xmv-Event-On')
+        const xmvRemove = inject('Xmv-Event-Remove')
 
-        xmvOn('scroll' ,debounce(()=>{
+        const onScrollDebounce = debounce(()=>{
             let arr = []
             let parentBdr = mode.contentElRef.value.getBoundingClientRect()
             let parentOffsetTop = parentBdr.top
@@ -55,7 +56,9 @@ export default defineComponent({
 
             $emit('itemClick',minPositiveValueObject.url.substr(1))
 
-        },100))
+        },100)
+
+        xmvOn('scroll' ,onScrollDebounce)
 
         const render = ()=>{
             return h('div' ,{class : 'xmv-pageroam'},[
@@ -69,6 +72,10 @@ export default defineComponent({
 
         onMounted(()=>{
             mode.contentElRef = contentElRef
+        })
+
+        onUnmounted(()=>{
+            xmvRemove('scroll' ,onScrollDebounce)
         })
 
         return ()=>{
