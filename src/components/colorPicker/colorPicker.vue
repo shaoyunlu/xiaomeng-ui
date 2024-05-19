@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <xmv-alpha-slider v-if="showAlpha != undefined" ref="alphaSliderRef"></xmv-alpha-slider>
+        <xmv-alpha-slider v-if="showAlpha" ref="alphaSliderRef"></xmv-alpha-slider>
         <div class="xmv-color-dropdown__btns">
             <span class="xmv-color-dropdown__value">
                 <xmv-input size="small" ref="inputRef"></xmv-input>
@@ -51,7 +51,7 @@ export default defineComponent({
     components:{xmvAlphaSlider},
     props:{
         modelValue : String,
-        showAlpha : String,
+        showAlpha : {type:Boolean ,default:false},
         size : String
     },
     setup(props ,context) {
@@ -237,7 +237,7 @@ export default defineComponent({
         }
 
         const handlePopoverShow = ()=>{
-            if (props.showAlpha != undefined){
+            if (props.showAlpha){
                 alphaSliderRef.value.calcSliderBound()
             }
         }
@@ -288,7 +288,7 @@ export default defineComponent({
         }
 
         const rgba = ()=>{
-            if (props.showAlpha != undefined){
+            if (props.showAlpha){
                 if (!isEmpty(selectedRGB.value)){             
                     return __changeAlpha(selectedRGB.value ,alphaSliderRef.value.thumbLeft)
                 }
@@ -301,7 +301,7 @@ export default defineComponent({
         })
 
         const handleWatch = (newVal)=>{
-            if (props.showAlpha != undefined){
+            if (props.showAlpha){
                 let alpha = __getAlpha(newVal)
                 if (alpha){
                     alphaSliderRef.value.thumbLeft = alpha
@@ -313,7 +313,7 @@ export default defineComponent({
         }
 
         const computeSelectedRGB = computed(()=>{
-            if (props.showAlpha != undefined){
+            if (props.showAlpha){
                 if (!isEmpty(selectedRGB.value)){             
                     return __changeAlpha(selectedRGB.value ,alphaSliderRef.value.thumbLeft)
                 }
