@@ -42,6 +42,7 @@ export default defineComponent({
                             type:list[i].getAttribute('a-type'),
                             url:list[i].getAttribute('url')})
             }
+
             let minPositiveValueObject = arr.reduce((min, current) => {
                 // 检查 current.value 是否是正数，并且（当前没有最小值或者 current.value 小于 min.value）
                 if (current.value > -5 && (!min || current.value < min.value)) {
@@ -52,6 +53,15 @@ export default defineComponent({
             }, null);  // 初始化 min 为 null
             if (minPositiveValueObject == null){
                 minPositiveValueObject = arr[arr.length - 1]
+            }
+            // 最小正值如果在屏幕外，那如果有上一个就选上一个
+            else if (minPositiveValueObject.value > window.innerHeight){
+                if (arr.length > 1){
+                    minPositiveValueObject = arr[minPositiveValueObject.index - 1]
+                }else{
+                    minPositiveValueObject = arr[0]
+                }
+                
             }
 
             $emit('itemClick',minPositiveValueObject.url.substr(1))
