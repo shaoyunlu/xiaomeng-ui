@@ -7,7 +7,7 @@
             <div v-if="type == 'daterange' || type == 'monthrange'" 
                 class="xmv-date-editor xmv-date-editor--daterange xmv-input__wrapper 
                         xmv-range-editor xmv-range-editor--default"
-                :class="{'is-active' : isActive ,'xmv-date-time-range-picker':withTime != undefined}"
+                :class="{'is-active' : isActive ,'xmv-date-time-range-picker':withTime}"
                 @click="handleDateRangeMouseup"
                 ref="daterangeRef">
                 <xmv-icon name="calendar" class="xmv-input__icon xmv-range__icon"></xmv-icon>
@@ -45,7 +45,7 @@ export default defineComponent({
         type : {type:String,default:'date'}, //daterange
         format : {type:String,default:'YYYY-MM-DD'},
         modelValue : String | Array,
-        withTime : String,
+        withTime : Boolean,
         size : String,
         style : String | Object
     },

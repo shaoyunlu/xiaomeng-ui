@@ -23,7 +23,7 @@ class DatePickerMode{
 
         this.todayObj = dayjs()
         this.type = ref(props.type)
-        this.withTime = (props.withTime != undefined)
+        this.withTime = props.withTime
         this.popoverRef = ref(null)
 
         this.initMode()
