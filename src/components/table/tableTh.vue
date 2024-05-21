@@ -2,7 +2,7 @@
     <th class="xmv-table__cell" :class="computeThClass" @click="handleThClick" >
         <div class="cell">
             {{data.label}}
-            <span class="caret-wrapper" v-if="data.sortable != undefined">
+            <span class="caret-wrapper" v-if="data.sortable">
                 <i class="sort-caret ascending" @click.stop="handleAscClick"></i>
                 <i class="sort-caret descending" @click.stop="handleDescClick"></i>
             </span>
@@ -29,7 +29,7 @@ export default defineComponent({
         const computeThClass = computed(()=>{
             let res = []
             res.push(sortAD.value)
-            if (props.data.sortable != undefined){
+            if (props.data.sortable){
                 res.push('is-sortable')
             }
             if (props.data.fixed != undefined){
@@ -42,7 +42,7 @@ export default defineComponent({
         })
 
         const handleThClick = ()=>{
-            if (props.data.sortable == undefined){
+            if (props.data.sortable == false){
                 return false
             }
             if (sortAD.value == 'ascending'){
@@ -61,7 +61,7 @@ export default defineComponent({
         }
 
         const handleAscClick = ()=>{
-            if (props.data.sortable == undefined){
+            if (props.data.sortable == false){
                 return false
             }
             if (sortAD.value == 'ascending'){
@@ -77,7 +77,7 @@ export default defineComponent({
         }
 
         const handleDescClick = ()=>{
-            if (props.data.sortable == undefined){
+            if (props.data.sortable == false){
                 return false
             }
             if (sortAD.value == 'descending'){

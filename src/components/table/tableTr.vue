@@ -43,7 +43,7 @@ export default defineComponent({
             if (props.data.xmvTrStatus){
                 res.push(props.data.xmvTrStatus + '-row')
             }
-            if (tableMode.option.stripe != undefined){
+            if (tableMode.option.stripe){
                 if (props.index%2 != 0){
                     res.push('xmv-table__row--striped')
                 }

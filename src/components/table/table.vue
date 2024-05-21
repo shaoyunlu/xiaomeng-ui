@@ -40,8 +40,8 @@ export default defineComponent({
     components:{XmvTableHeader,XmvTableBody},
     props:{
         height : {type : String},
-        border : String,
-        stripe : String,
+        border : {type : Boolean ,default : false},
+        stripe : {type : Boolean ,default : false},
         maxHeight : String,
         data : Array,
         highlightCurrentRow : Boolean,
@@ -104,10 +104,10 @@ export default defineComponent({
 
         const computeTableClass = computed(()=>{
             let res = []
-            if (props.border != undefined){
+            if (props.border){
                 res.push('xmv-table--border')
             }
-            if (props.stripe != undefined){
+            if (props.stripe){
                 res.push('xmv-table--striped')
             }
             if (!isEmpty(scrollingStatus.value)){

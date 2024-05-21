@@ -10,7 +10,7 @@ export default defineComponent({
         prop : String,
         label : String,
         width : String,
-        sortable : String,
+        sortable : {type : Boolean ,default : false},
         sortMethod : Function,
         fixed : String,
         type : String,

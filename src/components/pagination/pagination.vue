@@ -1,8 +1,8 @@
 <template>
     <div class="xmv-pagination" 
         :class="{
-                    'is-background' : (background != undefined),
-                    'xmv-pagination--small' : (small != undefined),
+                    'is-background' : background,
+                    'xmv-pagination--small' : small,
                     'is-total-zero' : (total == 0)
                 }">
         <component :is='"xmv-pagination-" + layoutArr[0]' class="is-first"></component>
@@ -33,8 +33,8 @@ export default defineComponent({
         total : {type:Number ,default:0},
         pageSize : {type:Number ,default:10},
         pageCount : {type:Number ,default:7},
-        background : String,
-        small : String,
+        background : {type:Boolean ,default : false},
+        small : {type:Boolean ,default : false},
         layout : {type:String ,default:'prev,pager,next'}
     },
     setup(props ,context) {
