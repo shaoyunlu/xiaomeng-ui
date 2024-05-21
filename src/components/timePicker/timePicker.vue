@@ -1,7 +1,7 @@
 <template>
     <xmv-popover :beStripped="true" @show="handlePopoverShow" @hide="handlePopoverHide">
         <template #trigger>
-            <xmv-input class="xmv-date-editor xmv-date-editor--time" :style="style" :size="size" v-if="isRange == undefined"
+            <xmv-input class="xmv-date-editor xmv-date-editor--time" :style="style" :size="size" v-if="isRange == false"
             prefix-icon="clock" clearable ref="inputRef" @clear="handleClear"></xmv-input>
 
             <div v-else
@@ -19,12 +19,12 @@
             </div>
         </template>
     </xmv-popover>
-    <div class="xmv-time-panel" :class="{'xmv-time-panel-range' : isRange != undefined}">
+    <div class="xmv-time-panel" :class="{'xmv-time-panel-range' : isRange}">
             <div class="cell">
                 <xmv-time-panel @val="handleVal" :tMode="timePickerMode" ref="panelRef" pos="left"></xmv-time-panel>
             </div>
             <div class="cell">
-                <xmv-time-panel v-if="isRange != undefined" 
+                <xmv-time-panel v-if="isRange" 
                     @val="handleVal" ref="panleRightRef" :tMode="timePickerRightMode" pos="right"></xmv-time-panel>
             </div>
         <div class="xmv-time-panel__footer"></div>
@@ -46,7 +46,7 @@ export default defineComponent({
     name:"xmvTimePicker",
     props:{
         modelValue : String | Array,
-        isRange : String,
+        isRange : {type : Boolean ,default : false},
         splitSymbol : {type : String ,default : ":"},
         size : String,
         style : String | Object,
@@ -77,7 +77,7 @@ export default defineComponent({
 
         const {$on ,$emit} = createEventBus(eventBus)
         provide('EventBus' ,{$on ,$emit})
-        provide('IsRange' ,props.isRange != undefined)
+        provide('IsRange' ,props.isRange)
 
         XmvEventOn('mouseup' ,(e)=>{
             isActive.value = false
@@ -95,7 +95,7 @@ export default defineComponent({
             if (isEmpty(val)){
                 return false
             }
-            if (props.isRange != undefined){
+            if (props.isRange){
                 val[0] && panelRef.value.dispatchVal(val[0])
                 val[1] && panleRightRef.value.dispatchVal(val[1])
 
@@ -127,7 +127,7 @@ export default defineComponent({
         }
 
         const handleVal = (info)=>{
-            if (props.isRange != undefined){
+            if (props.isRange){
                 context.emit('update:modelValue' ,[
                     timePickerMode.inputEl.value,
                     timePickerRightMode.inputEl.value
@@ -142,7 +142,7 @@ export default defineComponent({
         }
 
         const handlePopoverHide = ()=>{
-            if (props.isRange != undefined){
+            if (props.isRange){
                 let leftVal = timePickerMode.inputEl.value
                 let rightVal = timePickerRightMode.inputEl.value
 
@@ -188,7 +188,7 @@ export default defineComponent({
         }
 
         onMounted(()=>{
-            if (props.isRange != undefined){
+            if (props.isRange){
                 timePickerMode.inputEl = leftInputRef.value
                 timePickerRightMode.inputEl = rightInputRef.value
             }else{
