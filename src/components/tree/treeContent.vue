@@ -2,7 +2,7 @@
     <div class="xmv-tree-node__content" :class="{'is-disabled':node.disabled}" :style="computeStyle">
         <xmv-icon name="arrowRight" class="xmv-tree-node__expand-icon" 
         :class="computeIconClass" @click.stop="handleExpandIconClick"></xmv-icon>
-        <xmv-checkbox v-if="treeMode.showCheckbox != undefined"
+        <xmv-checkbox v-if="treeMode.showCheckbox"
         ref="checkboxRef"
         @check="handleCheck" 
         :checkStatus="node.isChecked"

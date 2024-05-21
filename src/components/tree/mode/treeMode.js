@@ -69,7 +69,7 @@ class TreeMode{
             return false
         }
         // 如果是单选模式，要有选中模式
-        if (this.showCheckbox != undefined){
+        if (this.showCheckbox){
             return false
         }
         this.$emit('nodeClick' ,node)
@@ -112,7 +112,7 @@ class TreeMode{
     }
 
     handleNodeCheck(node){
-        if (this.notAssociated != undefined){
+        if (this.notAssociated){
 
         }
         else{

@@ -154,7 +154,7 @@ export default defineComponent({
             if (props.parent != undefined){
                 props.node.parent = props.parent
             }
-            if (treeMode.draggable != undefined){
+            if (treeMode.draggable){
 
             }
         })

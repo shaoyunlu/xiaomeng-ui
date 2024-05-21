@@ -1,7 +1,7 @@
 <template>
     <div class="xmv-tree" ref="treeRef">
         <xmv-tree-node v-for="node in treeMode.rctData.data" :node="node" :key="node.value"></xmv-tree-node>
-        <div v-if="draggable != undefined" class="xmv-tree__drop-indicator" :style="computeDropIndicatorStyle"></div>
+        <div v-if="draggable" class="xmv-tree__drop-indicator" :style="computeDropIndicatorStyle"></div>
     </div>
 </template>
 
@@ -16,12 +16,12 @@ export default defineComponent({
     emits:['nodeClick' ,'nodeCheck' ,'node-drag-start' ,
             'node-drag-over' ,'node-drag-enter' ,'node-drag-leave' ,'node-drop' ,'node-drag-end'],
     props:{
-        showCheckbox : String,
+        showCheckbox : {type:Boolean ,default : false},
         filterNodeMethod : {
             type : Function
         },
-        notAssociated : String,  // 父子节点是否相关联,
-        draggable : String,
+        notAssociated : {type:Boolean ,default : false},  // 父子节点是否相关联,
+        draggable : {type:Boolean ,default : false},
         lazy : Boolean,
         load : Function,
         data : Array,
@@ -41,7 +41,7 @@ export default defineComponent({
         treeMode.$on = $on
         treeMode.$emit = $emit
         treeMode.treeRef = treeRef
-        treeMode.draggable = (props.draggable == undefined ? false : true)
+        treeMode.draggable = props.draggable
         treeMode.lazy = props.lazy
         treeMode.load = props.load
         treeMode.onlyChildNode = props.onlyChildNode
@@ -127,7 +127,7 @@ export default defineComponent({
                     }
                 })
                 cbf(treeMode.rctData.sData)
-                if (props.notAssociated == undefined){
+                if (props.notAssociated == false){
                     nextTick(()=>{
                         treeMode.rctData.sData.forEach(tmp =>{
                             treeMode.__handleParentNodeCheck(tmp)
