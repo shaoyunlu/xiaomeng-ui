@@ -41,7 +41,7 @@ export default defineComponent({
         class : String,
         fileList : Array,
         limit : Number,
-        listType : {type :String ,default:'text'},
+        listType : {type :String ,default:'text'}, //text,picture,picture-card
         drag : Boolean,
         beforeUpload : Function
     },

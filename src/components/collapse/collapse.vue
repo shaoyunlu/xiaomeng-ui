@@ -11,7 +11,7 @@ export default defineComponent({
     name:"xmvCollapse",
     props:{
         modelValue : [String ,Array],
-        accordion : String
+        accordion : {type:Boolean,default:false}
     },
     setup(props ,context) {
 

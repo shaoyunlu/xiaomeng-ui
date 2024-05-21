@@ -33,7 +33,7 @@ export default defineComponent({
         const accordion = inject('Accordion')
 
         $on('setVal' ,(val)=>{
-            if (accordion != undefined){
+            if (accordion){
                 isActive.value = (props.name == val)
             }else{
                 if (props.name == val){
@@ -44,7 +44,7 @@ export default defineComponent({
 
         const handleCollapse = ()=>{
             isActive.value = !isActive.value
-            if (accordion != undefined){
+            if (accordion){
                 $emit('setVal' ,props.name)
             }
         }
