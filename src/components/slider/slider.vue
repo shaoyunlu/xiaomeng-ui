@@ -25,7 +25,7 @@
                 <div v-for="tmp in stepList" class="xmv-slider__stop" :style="{left:tmp + '%'}"></div>
             </div>
         </div>
-        <xmv-input-number class="xmv-slider__input" v-if="showInput != undefined"
+        <xmv-input-number class="xmv-slider__input" v-if="showInput"
             v-model="sliderMode.sliderVal.value" :step="step" :size="size" :min="0" :max="100"
             @inputChange="handleInputChange"></xmv-input-number>
     </div>
@@ -42,7 +42,7 @@ export default defineComponent({
         formatTooltip : Function,
         step : {type : Number ,default : 1},
         showStep : {type : Boolean ,default : false},
-        showInput : {type : String},
+        showInput : {type : Boolean ,default : false},
         size : {type : String},
         disabled : {type : Boolean,default : false},
         range : {type : Boolean,default : false}
@@ -72,7 +72,7 @@ export default defineComponent({
             if (isDragging.value){
                 res.push('dragging')
             }
-            if (props.showInput != undefined){
+            if (props.showInput){
                 res.push('xmv-slider--with-input')
             }
             if (props.size != undefined){
