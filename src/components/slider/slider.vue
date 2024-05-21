@@ -21,7 +21,7 @@
                 </xmv-tooltip>
             </div>
 
-            <div v-if="showStep != undefined">
+            <div v-if="showStep">
                 <div v-for="tmp in stepList" class="xmv-slider__stop" :style="{left:tmp + '%'}"></div>
             </div>
         </div>
@@ -41,7 +41,7 @@ export default defineComponent({
         modelValue : Number | Array,
         formatTooltip : Function,
         step : {type : Number ,default : 1},
-        showStep : {type : String},
+        showStep : {type : Boolean ,default : false},
         showInput : {type : String},
         size : {type : String},
         disabled : {type : Boolean,default : false},
@@ -172,7 +172,7 @@ export default defineComponent({
                 handleWatch(props.modelValue)
             }
 
-            if (props.showStep != undefined){
+            if (props.showStep){
                 let listNum = 100 / props.step
                 for(let i=1;i<listNum;i++){
                     stepList.value.push(i*props.step)
