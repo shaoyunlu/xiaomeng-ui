@@ -15,9 +15,9 @@ export default defineComponent({
     name:"xmvTag",
     props:{
         closable : String,
-        type : {type : String ,default : 'light'},
+        type : string,
         size : String,
-        effect : String,
+        effect : {type : String ,default : 'light'},
         round : Boolean
     },
     emits:['close'],
