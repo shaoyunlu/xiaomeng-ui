@@ -15,7 +15,7 @@ class SelectMode{
         this.isEmpty = ref(false)
         this.tagsRef
         this.type = props.type
-        this.multiple = ref(props.multiple != undefined)
+        this.multiple = ref(props.multiple)
         this.collapseTags = ref(props.collapseTags)
         this.filterable = ref(props.filterable)
     }

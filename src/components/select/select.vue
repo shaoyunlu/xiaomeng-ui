@@ -57,7 +57,7 @@ export default defineComponent({
     props:{
         disabled : Boolean,
         clearable : Boolean,
-        multiple : String,
+        multiple : {type : Boolean,default : false},
         size : String,
         collapseTags : Boolean,
         maxcollapseTags : Number,
@@ -237,7 +237,7 @@ export default defineComponent({
         })
 
         const handleWatch = (val)=>{
-            if (props.multiple != undefined){
+            if (props.multiple){
                 let list = val
                 selectMode.rctData.sData = []
                 list.forEach(item =>{

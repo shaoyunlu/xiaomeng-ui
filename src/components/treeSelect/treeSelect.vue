@@ -18,7 +18,7 @@ import {deepClone ,isEmpty} from 'utils/data'
 export default defineComponent({
     name:"",
     props:{
-        multiple : String,
+        multiple : {type : Boolean,default : false},
         notAssociated : String,
         data : Array,
         modelValue : String | Array,
@@ -66,7 +66,7 @@ export default defineComponent({
                 xmvSelectRef.value.resetTree()
                 return false
             }
-            if (props.multiple != undefined){
+            if (props.multiple){
                 xmvSelectRef.value.setTreeMultipleValue(val)
             }else{
                 xmvSelectRef.value.setTreeValue(val)
