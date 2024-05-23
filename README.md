@@ -1,4 +1,4 @@
-# 欢迎使用 xiaomeng-ui！
+# 欢迎使用 XiaoMeng-UI！
 
 ## 简介
 XiaoMeng-UI 是一个基于 Vue 3 的现代化、轻量级、易于使用的 UI 框架，适合各级别开发者。
