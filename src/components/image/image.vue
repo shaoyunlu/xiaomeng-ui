@@ -79,11 +79,14 @@ export default defineComponent({
         })
 
         const handleImageClick = ()=>{
-            viewerInfoRest()
-            imageViewerIf.value = true
-            nextTick(()=>{
-                $emit('setVal' ,viewerInfo)
-            })
+            if (!isEmpty(props.previewSrcList)){
+                viewerInfoRest()
+                imageViewerIf.value = true
+                nextTick(()=>{
+                    $emit('setVal' ,viewerInfo)
+                })
+            }
+            context.emit('click')
         }
 
         const handleCloseClick = ()=>{
