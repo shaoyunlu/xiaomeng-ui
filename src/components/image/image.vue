@@ -86,7 +86,7 @@ export default defineComponent({
                     $emit('setVal' ,viewerInfo)
                 })
             }
-            context.emit('click')
+            context.emit('imageClick')
         }
 
         const handleCloseClick = ()=>{
