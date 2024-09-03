@@ -31,6 +31,7 @@
 import {computed, defineComponent,ref} from 'vue'
 export default defineComponent({
     name:"",
+    emits:['close'],
     props:{
         title : {type:String ,default : ''},
         width : String,
@@ -86,6 +87,7 @@ export default defineComponent({
             }else{
                 context.emit('update:modelValue' ,false)
             }
+            context.emit('close')
         }
 
         const handleMousedown = (e)=>{
