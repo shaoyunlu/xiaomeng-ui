@@ -35,6 +35,8 @@ import lineChart from './category/lineChart.vue'
 import moreFilled from './category/moreFilled.vue'
 import message from './category/message.vue'
 import minus from './category/minus.vue'
+import micOn from './category/micOn.vue'
+import micOff from './category/micOff.vue'
 import pieChart from './category/pieChart.vue'
 import plus from './category/plus.vue'
 import pic from './category/picture.vue'
@@ -65,7 +67,7 @@ export default defineComponent({
                     hide,
                     infoFilled,lineChart,
                     loading , 
-                    message,minus,moreFilled,
+                    message,minus,moreFilled,micOn,micOff,
                     plus,pieChart,pic,
                     refresh,refreshLeft,refreshRight,
                     sort ,setting ,search,successFilled,star,
