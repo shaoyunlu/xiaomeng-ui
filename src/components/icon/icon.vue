@@ -13,7 +13,7 @@ import arrowRight from './category/arrowRight.vue'
 import arrowUp from './category/arrowUp.vue'
 import back from './category/back.vue'
 import barChart from './category/barChart.vue'
-import base from './category/base.vue'
+import bse from './category/base.vue'
 import check from './category/check.vue'
 import close from './category/close.vue'
 import circleCheck from './category/circleCheck.vue'
@@ -60,7 +60,7 @@ export default defineComponent({
     name:"xmvIcon",
     components:{
                     arrowLeft,arrowRight,arrowUp,arrowDown,
-                    back,barChart,base,
+                    back,barChart,bse,
                     calendar,check,clock,close,circleCheck,circleClose,circleCloseFilled,
                     dArrowLeft ,dArrowRight,download,dlt,document,
                     edit,empty,
