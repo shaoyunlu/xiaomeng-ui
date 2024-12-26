@@ -35,6 +35,7 @@ export default defineComponent({
     props:{
         title : {type:String ,default : ''},
         width : String,
+        top : String,
         modelValue : Boolean,
         beforeClose : Function,
         center : Boolean,
@@ -62,6 +63,9 @@ export default defineComponent({
             let res = {}
             if (props.width != undefined){
                 res['--xmv-dialog-width'] = props.width
+            }
+            if (props.top != undefined){
+                res['--xmv-dialog-margin-top'] = props.top
             }
             if (props.draggable){
                 res['transform'] = `translate(${transX.value}px, ${transY.value}px)`
