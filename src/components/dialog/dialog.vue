@@ -36,6 +36,7 @@ export default defineComponent({
         title : {type:String ,default : ''},
         width : String,
         top : String,
+        padding : String,
         modelValue : Boolean,
         beforeClose : Function,
         center : Boolean,
@@ -66,6 +67,9 @@ export default defineComponent({
             }
             if (props.top != undefined){
                 res['--xmv-dialog-margin-top'] = props.top
+            }
+            if (props.padding != undefined){
+                res['--xmv-dialog-padding-primary'] = props.padding
             }
             if (props.draggable){
                 res['transform'] = `translate(${transX.value}px, ${transY.value}px)`
