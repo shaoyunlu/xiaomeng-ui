@@ -50,7 +50,7 @@ export default defineComponent({
         draggable : Boolean,
         beforeDrop : Function
     },
-    emits:['node-drag-end','node-drop'],
+    emits:['node-drag-end','node-drop','tr-click'],
     setup(props ,context) {
 
         const tableMode = new TableMode(props)

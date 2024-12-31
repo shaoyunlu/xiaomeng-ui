@@ -63,6 +63,8 @@ export default defineComponent({
             if (tableMode.option.highlightCurrentRow){
                 tableMode.$emit('trClick' ,props.index)
             }
+            // 触发单行点击事件
+            tableMode.ctx.emit('tr-click',props.data)
         }
         tableMode.$on('trClick' ,__index =>{
             props.data.checked = (props.index == __index)
