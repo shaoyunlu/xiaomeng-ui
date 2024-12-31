@@ -46,7 +46,7 @@ class PaginationMode{
 
     emitChangeNumber(){
         this.$emit('changeNum' ,this.currentPage.value)
-        this.ctx.emit('changeNumber')
+        this.ctx.emit('changeNumber' ,this.currentPage.value)
     }
 
     emitInnerChangeNumber(){
