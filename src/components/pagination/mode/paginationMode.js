@@ -50,7 +50,7 @@ class PaginationMode{
     }
 
     emitInnerChangeNumber(){
-        this.$emit('change-number' ,this.currentPage.value)
+        this.$emit('changeNum' ,this.currentPage.value)
     }
 
     generateArray(m ,n ,max){
