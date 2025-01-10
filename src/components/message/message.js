@@ -16,6 +16,7 @@ function XmvMessage({message ,type ,showClose ,duration ,grouping}){
     let container = document.createElement('div')
     document.body.appendChild(container)
     addStyle(container,'z-index','9999')
+    addStyle(container,'position','fixed')
     let vnode = createVNode(MessageConstructor ,{
         top : 20 + instances.length * 64,
         instances : instances,
