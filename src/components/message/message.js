@@ -1,5 +1,6 @@
 import {createVNode ,reactive ,render ,watch} from 'vue'
 import MessageConstructor from "./message.vue"
+import {addStyle} from 'utils/dom'
 
 const instances = reactive([])
 
@@ -14,6 +15,7 @@ function XmvMessage({message ,type ,showClose ,duration ,grouping}){
     let vm
     let container = document.createElement('div')
     document.body.appendChild(container)
+    addStyle(container,'z-index','9999')
     let vnode = createVNode(MessageConstructor ,{
         top : 20 + instances.length * 64,
         instances : instances,
