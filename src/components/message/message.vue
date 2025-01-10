@@ -1,6 +1,6 @@
 <template>
     <transition name="xmv-message"  @after-leave="handleLeave">
-        <div v-show="isShow" v-if="isDisplay" ref="divRef">
+        <div v-show="isShow" v-if="isDisplay" ref="divRef" style="z-index:9999">
             <div class="xmv-message" :class="computeClass" :style="computeStyle">
                 <xmv-badge class="xmv-message__badge" :value="groupNumRef" v-if="grouping"></xmv-badge>
                 <xmv-icon :name="(type=='error'?'circleClose':type) + 'Filled'"
