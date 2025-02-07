@@ -11,9 +11,11 @@
 <script>
 import {computed, defineComponent, watch ,ref} from 'vue'
 import {isEmpty} from 'utils/data'
+import xmvIcon  from 'comps/icon/icon.vue'
 export default defineComponent({
     name:"xmvButton",
     emits:['click'],
+    components : {xmvIcon},
     props:{
         type : String,
         size : String,
