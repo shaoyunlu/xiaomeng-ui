@@ -25,7 +25,7 @@ function createComponent(msg,title,type,option={}){
             container.remove()
         }
     },{
-        default : msg
+        default : () => msg
     })
     render(vnode, container)
     vm = vnode.component.proxy
