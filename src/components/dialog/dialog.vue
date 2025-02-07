@@ -29,10 +29,11 @@
 
 <script>
 import {computed, defineComponent,ref} from 'vue'
-import xmvIcon from 'comps/dialog/dialog.vue'
+import xmvIcon from 'comps/icon/icon.vue'
 export default defineComponent({
     name:"",
     emits:['close','update:modelValue'],
+    components:{xmvIcon},
     props:{
         title : {type:String ,default : ''},
         width : String,
