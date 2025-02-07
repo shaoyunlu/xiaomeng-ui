@@ -9,8 +9,10 @@
 
 <script>
 import {defineComponent, inject ,ref} from 'vue'
+import xmvIcon  from 'comps/icon/icon.vue'
 export default defineComponent({
     name:"xmvDropdownItem",
+    components:{xmvIcon},
     props:{
         icon : String | Object,
         disabled : Boolean,
