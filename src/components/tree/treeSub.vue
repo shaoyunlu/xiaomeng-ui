@@ -15,7 +15,9 @@ export default defineComponent({
 
         const childrenDivRef = ref(null)
 
-        provide('Level' ,inject('Level') + 1)
+        let __level = inject('Level')
+
+        provide('Level' ,__level + 1)
 
         onMounted((()=>{
             
