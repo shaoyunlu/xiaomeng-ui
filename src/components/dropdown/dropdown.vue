@@ -31,9 +31,11 @@
 
 <script>
 import {defineComponent, provide ,ref} from 'vue'
+import xmvIcon  from 'comps/icon/icon.vue'
 export default defineComponent({
     name:"xmvDropdown",
     emits:['itemClick'],
+    components:{xmvIcon},
     props:{
         trigger : {type : String ,default : 'hover'},
         splitButton : {type : Boolean ,default : false},
