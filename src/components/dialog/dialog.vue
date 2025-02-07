@@ -32,7 +32,7 @@ import {computed, defineComponent,ref} from 'vue'
 import xmvIcon from 'comps/dialog/dialog.vue'
 export default defineComponent({
     name:"",
-    emits:['close','update:modelValue'],
+    emits:['close'],
     components:{xmvIcon},
     props:{
         title : {type:String ,default : ''},
