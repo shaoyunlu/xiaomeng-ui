@@ -177,6 +177,9 @@ class CarouselMode{
 
     animate(){
         clearInterval(this.interval)
+        if (this.itemLength == 1){
+            return false
+        }
         this.interval = setInterval(()=>{
             this.position = 'right'
             this.run()
@@ -207,6 +210,9 @@ class CarouselMode{
     }
 
     left(){
+        if (this.itemLength == 1){
+            return false
+        }
         this.cache.push('left')
         if (!this.isExcute){
             this.isExcute = true
@@ -215,6 +221,9 @@ class CarouselMode{
     }
 
     right(){
+        if (this.itemLength == 1){
+            return false
+        }
         this.cache.push('right')
         if (!this.isExcute){
             this.isExcute = true
