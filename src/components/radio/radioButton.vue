@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {defineComponent ,inject ,onMounted ,ref ,watch} from 'vue'
+import {defineComponent ,inject ,nextTick,onMounted ,ref ,watch} from 'vue'
 export default defineComponent({
     name:"xmvRadioButton",
     props:{
@@ -40,9 +40,9 @@ export default defineComponent({
         $on('setVal' ,(label)=>{
             isChecked.value = (props.label == label)
             if (isChecked.value){
-                inputRef.value.setAttribute('checked' ,'')
+                inputRef.value.checked = true
             }else{
-                inputRef.value.removeAttribute('checked')
+                inputRef.value.checked = false
             }
         })
 
