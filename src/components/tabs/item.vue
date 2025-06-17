@@ -46,6 +46,7 @@ export default defineComponent({
 
         const handleClick = ()=>{
             props.data.isActive = true
+            tabsMode.ctx.emit('update:modelValue' ,props.data.name)
             tabsMode.$emit('itemClick' ,props.data.name)
         }
 
