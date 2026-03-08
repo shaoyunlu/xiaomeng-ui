@@ -189,8 +189,9 @@ class DatePickerMode{
         let res = ''
         let dateObj = (this.pos == 'left' ? this.storeMode.dateObj.left : this.storeMode.dateObj.right)
         if (dateObj){
+            const timeVal = this.timeModel?.value || dateObj.format('HH:mm:ss')
             res = dateObj.format(this.format) 
-                            + (this.withTime?" " + this.timeModel.value:'' )
+                            + (this.withTime?" " + timeVal:'' )
         }
         return res
     }
@@ -198,8 +199,9 @@ class DatePickerMode{
     setInput(){
         let dateObj = (this.pos == 'left' ? this.storeMode.dateObj.left : this.storeMode.dateObj.right)
         if (dateObj){
+            const timeVal = this.timeModel?.value || dateObj.format('HH:mm:ss')
             this.inputEl.value = dateObj.format(this.format) 
-                            + (this.withTime?" " + this.timeModel.value:'' )
+                            + (this.withTime?" " + timeVal:'' )
         }
         if (this.inputRef){
             this.inputRef.value.handleInputInput()

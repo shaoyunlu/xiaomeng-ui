@@ -150,10 +150,23 @@ export default defineComponent({
             if (isEmpty(val)){
                 return false
             }
+
+            const syncTimeModel = (mode, rawVal)=>{
+                if (!props.withTime || !mode || !mode.timeModel || !rawVal){
+                    return
+                }
+                const strVal = String(rawVal)
+                const timePart = strVal.split(' ')[1]
+                if (timePart && /^\d{2}:\d{2}:\d{2}$/.test(timePart)){
+                    mode.timeModel.value = timePart
+                }
+            }
+
             if (props.type == 'date' || props.type == 'month')
             {
                 datePickerMode.setMode(val)
                 storeMode.dateObj.left = dayjs(val)
+                syncTimeModel(datePickerMode, val)
                 datePickerMode.setInput()
             }
             else if (props.type == 'daterange')
@@ -162,6 +175,8 @@ export default defineComponent({
                 storeMode.dateObj.right = dayjs(val[1])
                 storeMode.handleList(dayjs(val[0]))
                 storeMode.handleList(dayjs(val[1]))
+                syncTimeModel(datePickerMode, val[0])
+                syncTimeModel(datePickerRightMode, val[1])
                 // 如果两个月份是同月的话
                 if (storeMode.dateObj.left.diff(storeMode.dateObj.right ,'month') == 0){
                     datePickerMode.setMode(val[0])
@@ -179,6 +194,8 @@ export default defineComponent({
                 storeMode.dateObj.right = dayjs(val[1])
                 storeMode.handleList(dayjs(val[0]))
                 storeMode.handleList(dayjs(val[1]))
+                syncTimeModel(datePickerMode, val[0])
+                syncTimeModel(datePickerRightMode, val[1])
                 datePickerMode.setMode(val[0])
                 datePickerRightMode.setMode(val[1])
                 datePickerMode.setInput()
