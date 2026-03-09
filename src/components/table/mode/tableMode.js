@@ -105,7 +105,13 @@ class TableMode{
 
     __handleAutomatic(){
         // 根据父元素的宽度，重新分配各个col
-        let parentNodeWidth = this.parentEl.clientWidth
+        let parent = this.parentEl
+        let style = getComputedStyle(parent)
+
+        let paddingLeft = parseFloat(style.paddingLeft)
+        let paddingRight = parseFloat(style.paddingRight)
+
+        let parentNodeWidth = parent.clientWidth - paddingLeft - paddingRight
         const header = this.rctData.header
 
         const hasWidthArray = header.filter(tmp=>{return !tmp.automatic})
