@@ -119,7 +119,7 @@ export default defineComponent({
             }
         }
 
-        XmvEventOn('mouseup' ,(e)=>{
+        const stopMouseup = XmvEventOn('mouseup' ,(e)=>{
             if (!XmvBubbling.status){
                 return false
             }
@@ -153,6 +153,7 @@ export default defineComponent({
         }
 
         onUnmounted(()=>{
+            stopMouseup()
             popperEl && popperEl.remove()
         })
 

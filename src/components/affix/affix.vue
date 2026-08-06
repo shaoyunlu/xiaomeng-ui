@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {computed, defineComponent, inject, onMounted, reactive, ref} from 'vue'
+import {computed, defineComponent, inject, onMounted, onUnmounted, reactive, ref} from 'vue'
 import {addStyle} from 'utils/dom'
 export default defineComponent({
     name:"",
@@ -59,7 +59,7 @@ export default defineComponent({
         let targetRectTop
         let targetRectBottom
 
-        XmvEventOn('scroll' ,(e)=>{
+        const stopScroll = XmvEventOn('scroll' ,(e)=>{
             setFix()
         })
 
@@ -116,6 +116,10 @@ export default defineComponent({
             oriAffixRectTop = affixRect.top + scrollTop
             oriAffixRectBottom = affixRect.top + scrollTop + affixRect.height
             setFix()
+        })
+
+        onUnmounted(()=>{
+            stopScroll()
         })
 
         return {affixRef ,fixDivRef ,isFixed ,computedAffixStyle ,computedFixedStyle}

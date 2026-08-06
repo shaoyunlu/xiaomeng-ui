@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {computed, defineComponent ,ref ,inject} from 'vue'
+import {computed, defineComponent ,ref ,inject, onUnmounted} from 'vue'
 export default defineComponent({
     name:"xmvBacktop",
     props:{
@@ -26,8 +26,12 @@ export default defineComponent({
 
         const $on = inject('Xmv-Event-On')
 
-        $on('scroll' ,(e)=>{
+        const stopScroll = $on('scroll' ,(e)=>{
             judgeShow()
+        })
+
+        onUnmounted(()=>{
+            stopScroll()
         })
 
         const judgeShow = ()=>{

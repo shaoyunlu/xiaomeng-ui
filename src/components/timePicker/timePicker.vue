@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import {reactive, defineComponent, onMounted, provide ,ref, watch ,inject, toRaw} from 'vue'
+import {reactive, defineComponent, onMounted, onUnmounted, provide ,ref, watch ,inject, toRaw} from 'vue'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import TimePickerMode from './mode/timePicker'
@@ -79,7 +79,7 @@ export default defineComponent({
         provide('EventBus' ,{$on ,$emit})
         provide('IsRange' ,props.isRange)
 
-        XmvEventOn('mouseup' ,(e)=>{
+        const stopMouseup = XmvEventOn('mouseup' ,(e)=>{
             isActive.value = false
         })
 
@@ -201,6 +201,10 @@ export default defineComponent({
             $emit('setDisabledHour' ,props.disabledHours)
             $emit('setDisabledMinute' ,props.disabledMinutes)
             $emit('setDisabledSecond' ,props.disabledSeconds)
+        })
+
+        onUnmounted(()=>{
+            stopMouseup()
         })
 
         return {panelRef,panleRightRef,inputRef,timePickerMode,timePickerRightMode,isActive,

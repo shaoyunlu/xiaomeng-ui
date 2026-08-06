@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import {computed, defineComponent, onMounted, provide ,reactive ,ref ,inject,watch, nextTick} from 'vue'
+import {computed, defineComponent, onMounted, onUnmounted, provide ,reactive ,ref ,inject,watch, nextTick} from 'vue'
 import DatePickerMode from './mode/datePickerMode'
 import StoreMode from './mode/storeMode'
 import xmvCalendar from './calendar.vue'
@@ -68,7 +68,7 @@ export default defineComponent({
 
         const XmvEventOn = inject('Xmv-Event-On')
 
-        XmvEventOn('mouseup' ,(e)=>{
+        const stopMouseup = XmvEventOn('mouseup' ,(e)=>{
             isActive.value = false
         })
 
@@ -218,6 +218,10 @@ export default defineComponent({
                handleWatch(props.modelValue)
             }
             $emit('change')
+        })
+
+        onUnmounted(()=>{
+            stopMouseup()
         })
 
         return {datePickerMode ,datePickerRightMode ,computePanelClass ,

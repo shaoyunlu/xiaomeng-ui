@@ -20,11 +20,39 @@ export function resizeOB(el ,cbf){
 }
 
 export function createEventBus(eventBus){
+    // 移除一个事件
+    const $remove = (event ,callback)=>{
+        const listenerList = eventBus.listeners[event]
+        if (!listenerList){
+            return false
+        }
+
+        const index = listenerList.indexOf(callback)
+        if (index < 0){
+            return false
+        }
+
+        listenerList.splice(index, 1)
+        if (listenerList.length == 0){
+            delete eventBus.listeners[event]
+        }
+        return true
+    }
+
     const $on = (event, callback) => {
         if (!eventBus.listeners[event]) {
           eventBus.listeners[event] = [];
         }
         eventBus.listeners[event].push(callback);
+
+        let isSubscribed = true
+        return ()=>{
+            if (!isSubscribed){
+                return false
+            }
+            isSubscribed = false
+            return $remove(event ,callback)
+        }
     };
   
     // 触发一个事件
@@ -34,15 +62,18 @@ export function createEventBus(eventBus){
         }
     };
 
-    // 移除一个事件
-    const $remove = (event ,callback)=>{
-        if (eventBus.listeners[event]){
-            let index = eventBus.listeners[event].indexOf(callback)
-            eventBus.listeners[event].splice(index, 1);
+    const $clear = (event)=>{
+        if (event != undefined){
+            delete eventBus.listeners[event]
+            return
         }
+
+        Object.keys(eventBus.listeners).forEach(eventName =>{
+            delete eventBus.listeners[eventName]
+        })
     }
 
-    return {$on ,$emit ,$remove}
+    return {$on ,$emit ,$remove ,$clear}
 }
 
 // 防抖函数

@@ -88,7 +88,7 @@ const register = (vue)=>{
         listeners : {}
     })
 
-    const {$on ,$emit ,$remove} = createEventBus(eventBus)
+    const {$on ,$emit ,$remove ,$clear} = createEventBus(eventBus)
 
     // 创建一个xmv-popper-container
     const popperContainerDiv = document.createElement('div')
@@ -102,13 +102,37 @@ const register = (vue)=>{
     provide('Xmv-Bubbling' ,{status : true})
 
     // 分发各种事件
-    window.addEventListener('mouseup' ,(e)=>{
+    const handleWindowMouseup = (e)=>{
         $emit('mouseup' ,e)
-    })
+    }
 
-    window.addEventListener('scroll' ,(e)=>{
+    const handleWindowScroll = (e)=>{
         $emit('scroll' ,e)
-    })
+    }
+
+    window.addEventListener('mouseup' ,handleWindowMouseup)
+    window.addEventListener('scroll' ,handleWindowScroll)
+
+    let isUnmounted = false
+    const cleanup = ()=>{
+        if (isUnmounted){
+            return
+        }
+        isUnmounted = true
+        window.removeEventListener('mouseup' ,handleWindowMouseup)
+        window.removeEventListener('scroll' ,handleWindowScroll)
+        $clear()
+        popperContainerDiv.remove()
+    }
+
+    const originalUnmount = vue.unmount
+    vue.unmount = (...args)=>{
+        try{
+            return originalUnmount.apply(vue ,args)
+        }finally{
+            cleanup()
+        }
+    }
 
     vue.component('xmvLayout', xmvLayout)
     vue.component('xmvButton', xmvButton)
