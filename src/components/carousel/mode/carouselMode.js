@@ -18,9 +18,22 @@ class CarouselMode{
         this.translateStr = (this.direction == 'vertical' ? 'translateY' : 'translateX')
         this.currentAnimateIndex = 0
         this.position = 'right'
-        this.interval
+        this.interval = null
+        this.timeouts = new Set()
+        this.destroyed = false
         this.cache = []
         this.isExcute = false
+    }
+
+    __setTimeout(callback ,delay){
+        const timeout = setTimeout(()=>{
+            this.timeouts.delete(timeout)
+            if (!this.destroyed){
+                callback()
+            }
+        } ,delay)
+        this.timeouts.add(timeout)
+        return timeout
     }
 
     reset(){
@@ -89,7 +102,7 @@ class CarouselMode{
                 this.currentAnimateIndex = this.itemLength - 1
         }
         this.setActiveClass(this.currentAnimateIndex)
-        setTimeout(()=>{
+        this.__setTimeout(()=>{
             this.afterAnimate()
         } ,450)
 
@@ -170,14 +183,15 @@ class CarouselMode{
 
     run(){
         this.beforeAnimate()
-        setTimeout(()=>{
+        this.__setTimeout(()=>{
             this.animateOnce()
         },10)
     }
 
     animate(){
         clearInterval(this.interval)
-        if (this.itemLength == 1){
+        this.interval = null
+        if (this.destroyed || this.itemLength <= 1){
             return false
         }
         this.interval = setInterval(()=>{
@@ -192,7 +206,7 @@ class CarouselMode{
             this.run()
         }
     
-        setTimeout(()=>{
+        this.__setTimeout(()=>{
             this.cache.shift()
             if (this.cache[0] != undefined){
                 this.excuteCache()
@@ -207,6 +221,16 @@ class CarouselMode{
         this.cache = []
         this.isExcute = false
         clearInterval(this.interval)
+        this.interval = null
+    }
+
+    destroy(){
+        this.destroyed = true
+        this.stop()
+        this.timeouts.forEach(timeout =>{
+            clearTimeout(timeout)
+        })
+        this.timeouts.clear()
     }
 
     left(){
@@ -261,7 +285,7 @@ class CarouselMode{
             addStyle(itemEl ,'transform' ,`${this.translateStr}(${pom + wrapperVal*(this.indexArray.indexOf(i)+1)}px)`)
         })
 
-        setTimeout(()=>{
+        this.__setTimeout(()=>{
             this.rctData.itemList.forEach((instance ,i) =>{
                 let itemEl = instance.proxy.itemRef
                 if (i == this.indexArray[0] || i == this.indexArray[1]){
@@ -277,7 +301,7 @@ class CarouselMode{
                     addStyle(itemEl ,'transform' ,`${this.translateStr}(0px)`)
                 }
             })
-            setTimeout(()=>{
+            this.__setTimeout(()=>{
                 this.afterAnimate()
             } ,450)
         },10)

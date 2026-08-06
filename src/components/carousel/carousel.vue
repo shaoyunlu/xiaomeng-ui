@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import {defineComponent, onMounted, provide, ref} from 'vue'
+import {defineComponent, onMounted, onUnmounted, provide, ref} from 'vue'
 import CarouselMode from './mode/carouselMode';
 export default defineComponent({
     name:"xmvCarousel",
@@ -84,6 +84,10 @@ export default defineComponent({
         onMounted(()=>{
             carouselMode.reset()
             carouselMode.animate()
+        })
+
+        onUnmounted(()=>{
+            carouselMode.destroy()
         })
 
         return {containerRef ,indicatorUlRef ,leftRightButtonShow ,carouselMode,

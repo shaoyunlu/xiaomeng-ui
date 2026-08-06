@@ -11,7 +11,7 @@ import XmvTransition from 'comps/transition/transition'
 export default defineComponent({
     name:"xmvTooltip",
     props:{
-        content : String | Number,
+        content : [String, Number],
         placement : {type : String,default : 'top'},
         width : {type : String,default : 'auto'},
         isAlignCenter : {type : Boolean,default : false },
@@ -27,6 +27,10 @@ export default defineComponent({
         const keepShow = ref(false)
         let mouseType = ''
 
+        const setTextContent = (content)=>{
+            popperEl.textContent = content == null ? '' : String(content)
+        }
+
         const createPopperEl = ()=>{
             if (popperEl)
                 return false
@@ -34,7 +38,7 @@ export default defineComponent({
             if (slots.content){
                 render(h(() => slots.content()), popperEl)
             }else{
-                popperEl.innerHTML = props.content
+                setTextContent(props.content)
             }
             addClass(popperEl ,'xmv-popper is-' + props.effect)
             
@@ -89,10 +93,11 @@ export default defineComponent({
         }
 
         watch(()=>props.content ,(newVal)=>{
-            popperEl.innerHTML = newVal
-            setTimeout(()=>{
-                setPosition()
-            } ,10)
+            if (!popperEl || slots.content){
+                return
+            }
+            setTextContent(newVal)
+            setPosition()
         })
 
         watch(()=>props.disabled ,(newVal)=>{
