@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {computed, defineComponent ,inject,nextTick,onMounted,ref} from 'vue'
+import {computed, defineComponent ,inject,nextTick,onMounted,onUnmounted,ref} from 'vue'
 import {getDomMartix ,setDomMartix ,removeTextSelected} from 'utils/dom'
 import {isLowVersionFirefox} from 'utils/dict'
 import {resizeOB} from 'utils/event'
@@ -50,6 +50,7 @@ export default defineComponent({
         const XmvBubbling = inject('Xmv-Bubbling')
         var parentHorThumbEl
         var parentVerThumEl
+        var stopResizeObserver = ()=>{}
         var currentMouseStatus
         var wRatio
         var hRatio
@@ -265,7 +266,7 @@ export default defineComponent({
             parentHorThumbEl = horThumbRef.value.parentNode
             parentVerThumEl = verThumRef.value.parentNode
 
-            resizeOB(viewRef.value ,()=>{
+            stopResizeObserver = resizeOB(viewRef.value ,()=>{
                 reset()
                 //init()
                 //polyfillHeight()
@@ -274,6 +275,10 @@ export default defineComponent({
             if (props.explicit && isPolyfill){
                 viewRef.value.style.width = scrollbarRef.value.scrollWidth - 17 + 'px'
             }
+        })
+
+        onUnmounted(()=>{
+            stopResizeObserver()
         })
 
         return {handleMouseover ,handleMouseleave ,hanleScroll, handleMousedown, handleWrapMousedown, handleWrapMouseup,

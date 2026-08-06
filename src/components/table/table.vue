@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {defineComponent, onMounted, provide ,ref ,reactive, computed ,watch} from 'vue'
+import {defineComponent, onMounted, onUnmounted, provide ,ref ,reactive, computed ,watch} from 'vue'
 import TableMode from './mode/tableMode'
 
 import XmvTableHeader from './tableHeader.vue'
@@ -145,6 +145,10 @@ export default defineComponent({
                 loadData(props.data)
             }
             setScrollClass()
+        })
+
+        onUnmounted(()=>{
+            tableMode.destroy()
         })
 
         return {tableHeaderWrapperRef , tableRef ,tableMode ,computeTableClass,

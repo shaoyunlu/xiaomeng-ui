@@ -24,6 +24,7 @@ class TableMode{
         this.currentDragNode = null
         this.currentDropEnterNode = null
         this.tmpTableBoundInfo
+        this.stopResizeObserver = null
     }
 
     init(){
@@ -37,14 +38,25 @@ class TableMode{
 
     layout(){
         let self = this
+        if (this.stopResizeObserver){
+            this.stopResizeObserver()
+            this.stopResizeObserver = null
+        }
         if (this.automatic){
             this.parentEl = this.tableRef.value.parentNode
             this.__handleAutomatic()
-            resizeOB(self.parentEl ,()=>{
+            this.stopResizeObserver = resizeOB(self.parentEl ,()=>{
                 self.__handleAutomatic()
             })
         }else{
             this.__handleFixed()
+        }
+    }
+
+    destroy(){
+        if (this.stopResizeObserver){
+            this.stopResizeObserver()
+            this.stopResizeObserver = null
         }
     }
 

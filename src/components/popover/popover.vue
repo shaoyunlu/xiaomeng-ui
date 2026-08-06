@@ -36,6 +36,7 @@ export default defineComponent({
         var popperEl
         var defaultEl
         var currentEventName
+        var stopResizeObserver = ()=>{}
         const isShow = ref(false)
 
         const createPopperEl = ()=>{
@@ -154,6 +155,7 @@ export default defineComponent({
 
         onUnmounted(()=>{
             stopMouseup()
+            stopResizeObserver()
             popperEl && popperEl.remove()
         })
 
@@ -195,7 +197,7 @@ export default defineComponent({
                     handleMouseleave()
                 })
             }
-            resizeOB(triggerEl ,()=>{
+            stopResizeObserver = resizeOB(triggerEl ,()=>{
                 setPosition()
             })
 

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {defineComponent, h, nextTick, onMounted ,ref} from 'vue'
+import {defineComponent, h, nextTick, onMounted, onUnmounted, ref} from 'vue'
 import {removeClass} from 'utils/dom'
 export default defineComponent({
     name:"xmvTransitionGroup",
@@ -17,6 +17,7 @@ export default defineComponent({
         const elRef = ref(null)
 
         let transitionDuration = 0
+        let observer
 
         const getTransitionDuration = ()=>{
             let el = document.createElement('div')
@@ -61,7 +62,7 @@ export default defineComponent({
 
         onMounted(()=>{
             getTransitionDuration()
-            let observer = new MutationObserver((record)=>{
+            observer = new MutationObserver((record)=>{
                 let item = record[0]
 
                 // 进场动画
@@ -121,6 +122,11 @@ export default defineComponent({
                     removeClass(children[i] ,name + '-enter-from')
                 }
             })
+        })
+
+        onUnmounted(()=>{
+            observer && observer.disconnect()
+            observer = null
         })
 
         return ()=>{

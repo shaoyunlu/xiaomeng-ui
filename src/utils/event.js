@@ -1,13 +1,14 @@
 // 检测元素高度变化
 export function resizeOB(el ,cbf){
+    let observer
     if (window.ResizeObserver){
-        const observer = new ResizeObserver(()=>{
+        observer = new ResizeObserver(()=>{
             cbf()
         })
     
         observer.observe(el) // 观测DOM元素
     }else{
-        const observer = new MutationObserver((mutations) => {
+        observer = new MutationObserver((mutations) => {
             cbf()
         });
 
@@ -16,6 +17,15 @@ export function resizeOB(el ,cbf){
             childList: true,  // 监测子元素变化
             subtree: true  // 监测所有后代节点的变化
         });
+    }
+
+    let isDisconnected = false
+    return ()=>{
+        if (isDisconnected){
+            return
+        }
+        isDisconnected = true
+        observer.disconnect()
     }
 }
 
