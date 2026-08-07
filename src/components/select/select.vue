@@ -83,6 +83,7 @@ export default defineComponent({
 
         const {$on ,$emit} = createEventBus(eventBus)
         const inputPlaceholder = ref(placeholderMsg)
+        const isMounted = ref(false)
 
         const computeClass = computed(()=>{
             let res = []
@@ -110,9 +111,7 @@ export default defineComponent({
                 nextTick(()=>{
                     selectMode.adjustWH()
                 })
-                if (props.modelValue != undefined){
-                    context.emit('update:modelValue' ,selectMode.getSelectedValList())
-                }
+                context.emit('update:modelValue' ,selectMode.getSelectedValList())
                 context.emit('nodeCheck' ,selectMode.rctData.sData)
             }else{
                 let selectData = selectMode.rctData.sData[0]
@@ -132,14 +131,15 @@ export default defineComponent({
         })
 
         const handleActive = ()=>{
+            if (props.disabled){
+                return
+            }
             selectMode.isFocus.value = true
             selectMode.isEmpty.value = false
             selectMode.rctData.dropdownWidth = selectMode.selectRef.value.clientWidth - 2
-            if (!props.disabled){
-                selectMode.inputRef.value.focus()
-                selectMode.popoverRef.value.setPosition()
-                selectMode.popoverRef.value.enable()
-            }
+            selectMode.inputRef.value.focus()
+            selectMode.popoverRef.value.setPosition()
+            selectMode.popoverRef.value.enable()
 
             if (selectMode.filterable.value){
                 selectMode.showAll()
@@ -207,8 +207,15 @@ export default defineComponent({
         }
 
         const handleInputClear = ()=>{
+            selectMode.rctData.sData = []
             inputPlaceholder.value = placeholderMsg
-            context.emit('update:modelValue' ,"")
+            context.emit('update:modelValue' ,props.multiple ? [] : "")
+            nextTick(()=>{
+                $emit('setVal')
+                if (selectMode.multiple.value && selectMode.tagsRef && selectMode.tagsRef.value){
+                    selectMode.adjustWH()
+                }
+            })
             if (props.type == 'tree'){
                 context.emit('clear')
             }
@@ -238,7 +245,12 @@ export default defineComponent({
 
         const handleWatch = (val)=>{
             if (props.multiple){
-                let list = val
+                let list = []
+                if (Array.isArray(val)){
+                    list = val
+                }else if (val != undefined && val !== ''){
+                    list = [val]
+                }
                 selectMode.rctData.sData = []
                 list.forEach(item =>{
                     let __data = filter(selectMode.rctData.options ,tmp=>{
@@ -265,11 +277,48 @@ export default defineComponent({
             })
         }
 
+        watch(selectMode.optionsVersion ,()=>{
+            if (!isMounted.value || props.type != 'select'){
+                return
+            }
+
+            if (props.modelValue != undefined){
+                handleWatch(props.modelValue)
+                return
+            }
+
+            if (props.multiple){
+                inputPlaceholder.value = (isEmpty(selectMode.rctData.sData)?placeholderMsg:'')
+            }else{
+                let selectData = selectMode.rctData.sData[0]
+                selectMode.inputRef.value.val(selectData ? selectData.label : '')
+            }
+            nextTick(()=>{
+                $emit('setVal')
+            })
+        })
+
+        const syncDisabled = (disabled)=>{
+            if (!selectMode.popoverRef.value){
+                return
+            }
+
+            if (disabled){
+                selectMode.popoverRef.value.disabled()
+                selectMode.popoverRef.value.hide(true ,0)
+                selectMode.isFocus.value = false
+            }else{
+                selectMode.popoverRef.value.enable()
+            }
+        }
+
+        watch(()=>props.disabled ,(newVal)=>{
+            syncDisabled(newVal)
+        } ,{flush:'post'})
+
         onMounted(()=>{
             selectMode.rctData.dropdownWidth = selectMode.selectRef.value.clientWidth - 2
-            if (props.disabled){
-                selectMode.popoverRef.value.disabled()
-            }
+            syncDisabled(props.disabled)
             if (selectMode.multiple.value){
                 // 需要设置最小高度
                 selectMode.inputRef.value.inputRef.style['min-height'] = '30px'
@@ -277,9 +326,10 @@ export default defineComponent({
             if (!selectMode.filterable.value){
                 selectMode.inputRef.value.inputRef.setAttribute('readonly' ,'')
             }
-            if (!isEmpty(props.modelValue)){
+            if (props.modelValue != undefined){
                 handleWatch(props.modelValue)
             }
+            isMounted.value = true
         })
 
         return {selectMode ,computeClass ,inputPlaceholder,loadTreeData,resetTree,

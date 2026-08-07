@@ -1,7 +1,7 @@
 <template>
     <div class="xmv-select__tags" ref="tagsRef">
         <span class="xmv-select-tags-wrapper has-prefix" v-if="selectMode.collapseTags.value">
-            <xmv-tag closable @close="() => handleClose(collapData.data)" v-if="collapData.data">
+            <xmv-tag :closable="!selectMode.disabled.value" @close="() => handleClose(collapData.data)" v-if="collapData.data">
                 {{collapData.data.label}}
             </xmv-tag>
             <xmv-tag v-if="collapData.residue">
@@ -11,7 +11,7 @@
         <span class="xmv-select-tags-wrapper has-prefix" v-else>
             <xmv-tag v-for="tmp in selectMode.rctData.sData" 
                 :key="tmp.value" 
-                closable
+                :closable="!selectMode.disabled.value"
                 @close="() => handleClose(tmp)">
                 {{tmp.label}}
             </xmv-tag>
@@ -36,6 +36,9 @@ export default defineComponent({
         })
 
         const handleClose = (cData)=>{
+            if (selectMode.disabled.value){
+                return
+            }
             selectMode.popoverRef.value.disabled()
             selectMode.rctData.sData = filter(selectMode.rctData.sData ,(tmp)=>{
                 return tmp.value != cData.value

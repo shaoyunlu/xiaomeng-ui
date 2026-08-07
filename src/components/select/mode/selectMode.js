@@ -1,4 +1,4 @@
-import { nextTick, reactive, ref } from "vue";
+import { computed, nextTick, reactive, ref } from "vue";
 
 class SelectMode{
     constructor(props){
@@ -18,6 +18,37 @@ class SelectMode{
         this.multiple = ref(props.multiple)
         this.collapseTags = ref(props.collapseTags)
         this.filterable = ref(props.filterable)
+        this.disabled = computed(()=>props.disabled)
+        this.optionsVersion = ref(0)
+    }
+
+    registerOption(option){
+        if (this.rctData.options.indexOf(option) != -1){
+            return
+        }
+        this.rctData.options.push(option)
+        this.notifyOptionsChange()
+    }
+
+    updateOption(){
+        this.notifyOptionsChange()
+    }
+
+    unregisterOption(option){
+        let optionIndex = this.rctData.options.indexOf(option)
+        if (optionIndex != -1){
+            this.rctData.options.splice(optionIndex ,1)
+        }
+
+        let selectedIndex = this.rctData.sData.indexOf(option)
+        if (selectedIndex != -1){
+            this.rctData.sData.splice(selectedIndex ,1)
+        }
+        this.notifyOptionsChange()
+    }
+
+    notifyOptionsChange(){
+        this.optionsVersion.value++
     }
 
     adjustWH(){
