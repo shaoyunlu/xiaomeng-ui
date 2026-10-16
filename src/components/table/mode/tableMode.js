@@ -9,6 +9,8 @@ class TableMode{
         this.rctData = reactive({
             header : [],
             data : [],
+            sortColumn : null,
+            sortOrder : '',
             tableWidth : ''
         })
         this.ctx

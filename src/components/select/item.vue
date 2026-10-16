@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {defineComponent, inject ,ref} from 'vue'
+import {defineComponent, inject, onUnmounted, ref} from 'vue'
 import {find ,filter} from 'utils/data'
 export default defineComponent({
     name:"",
@@ -19,18 +19,23 @@ export default defineComponent({
         const isHover = ref(false)
         const isSelect = ref(false)
 
-        $on('itemClick' ,()=>{
+        const stopItemClick = $on('itemClick' ,()=>{
             let res = find(selectMode.rctData.sData ,(tmp)=>{
                 return tmp.value == props.data.value
             })
             isSelect.value = (res != undefined)
         })
 
-        $on('setVal' ,()=>{
+        const stopSetVal = $on('setVal' ,()=>{
             let res = find(selectMode.rctData.sData ,(tmp)=>{
                 return tmp.value == props.data.value
             })
             isSelect.value = (res != undefined)
+        })
+
+        onUnmounted(()=>{
+            stopItemClick()
+            stopSetVal()
         })
 
         const handleMouseover = ()=>{

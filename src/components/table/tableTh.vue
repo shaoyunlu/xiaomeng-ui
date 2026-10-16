@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {computed, defineComponent ,ref ,inject} from 'vue'
+import {computed, defineComponent ,inject} from 'vue'
 export default defineComponent({
     name:"xmvTableTh",
     props:{
@@ -22,9 +22,14 @@ export default defineComponent({
 
         const tableMode = inject('TableMode')
 
-        const sortAD = ref(null)
-
-        let sortType
+        // 排序状态由表格统一管理，同一时间只有一列显示排序方向。
+        const sortAD = computed({
+            get: ()=> tableMode.rctData.sortColumn === props.data ? tableMode.rctData.sortOrder : '',
+            set: (order)=>{
+                tableMode.rctData.sortColumn = order ? props.data : null
+                tableMode.rctData.sortOrder = order
+            }
+        })
 
         const computeThClass = computed(()=>{
             let res = []
