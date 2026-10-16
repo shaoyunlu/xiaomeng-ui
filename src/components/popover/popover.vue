@@ -5,10 +5,14 @@
 </template>
 
 <script>
-import {defineComponent,inject,onUnmounted,onMounted,ref} from 'vue'
+import {defineComponent,inject,onBeforeUnmount,onUnmounted,onMounted,ref} from 'vue'
 import {addClass ,getPagePosition } from 'utils/dom'
 import {resizeOB} from 'utils/event'
 import XmvTransition from 'comps/transition/transition'
+
+// 弹层会被移动到公共容器，通过触发元素所在的弹层记录父子关系。
+const popoverInstances = new WeakMap()
+
 export default defineComponent({
     name:"xmvPopover",
     emits:['mouseover' ,'mouseleave' ,'mouseclick' ,'show' ,'hide'],
@@ -30,7 +34,6 @@ export default defineComponent({
         const placeSpan = ref(null)
         const transition = new XmvTransition({})
         const XmvBubbling = inject('Xmv-Bubbling')
-        const XmvEventOn = inject('Xmv-Event-On')
         var pEl = inject('Xmv-Dom-PopperContainer')
         var triggerEl
         var popperEl
@@ -38,6 +41,8 @@ export default defineComponent({
         var currentEventName
         var stopResizeObserver = ()=>{}
         const isShow = ref(false)
+        const childPopovers = new Set()
+        let parentPopover = null
 
         const createPopperEl = ()=>{
             if (popperEl)
@@ -84,6 +89,11 @@ export default defineComponent({
             if (currentEventName == 'mouseover'){
                 return false
             }
+            const parentEl = triggerEl.closest('.xmv-popper')
+            parentPopover = parentEl ? popoverInstances.get(parentEl) : null
+            if (parentPopover){
+                parentPopover.children.add(popover)
+            }
             isShow.value = true
             currentEventName = 'mouseover'
             setPosition()
@@ -96,6 +106,11 @@ export default defineComponent({
         }
 
         const handleMouseleave = (withEmit = true ,timeout=200)=>{
+            childPopovers.forEach(child=>child.hide(true ,0))
+            if (parentPopover){
+                parentPopover.children.delete(popover)
+                parentPopover = null
+            }
             currentEventName = 'mouseleave'
             isShow.value = false
             transition.scaleOut(()=>{
@@ -120,17 +135,21 @@ export default defineComponent({
             }
         }
 
-        const stopMouseup = XmvEventOn('mouseup' ,(e)=>{
+        const containsTarget = (target)=>{
+            if (triggerEl.contains(target) || popperEl.contains(target)){
+                return true
+            }
+            return Array.from(childPopovers).some(child=>child.containsTarget(target))
+        }
+
+        const handleDocumentMouseup = (e)=>{
             if (!XmvBubbling.status){
                 return false
             }
-            let parent = e.target.closest('.xmv-popper')
-            if (!parent){
-                if (isShow.value){
-                    hide(true ,0)
-                }
+            if (isShow.value && !containsTarget(e.target)){
+                hide(true ,0)
             }
-        })
+        }
 
         const show = ()=>{
             isShow.value = true
@@ -145,6 +164,8 @@ export default defineComponent({
             handleMouseleave(withEmit,timeout)
         }
 
+        const popover = {children: childPopovers ,containsTarget ,hide}
+
         const enable = ()=>{
             enableRef.value = true
         }
@@ -153,10 +174,20 @@ export default defineComponent({
             enableRef.value = false
         }
 
-        onUnmounted(()=>{
-            stopMouseup()
+        onBeforeUnmount(()=>{
+            document.removeEventListener('mouseup' ,handleDocumentMouseup ,true)
+            childPopovers.forEach(child=>child.hide(true ,0))
+            if (parentPopover){
+                parentPopover.children.delete(popover)
+            }
             stopResizeObserver()
-            popperEl && popperEl.remove()
+        })
+
+        onUnmounted(()=>{
+            if (popperEl){
+                popoverInstances.delete(popperEl)
+                popperEl.remove()
+            }
         })
 
         onMounted(()=>{
@@ -169,10 +200,13 @@ export default defineComponent({
             }
 
             createPopperEl()
+            popoverInstances.set(popperEl ,popover)
             popperEl.appendChild(defaultEl)
             pEl.appendChild(popperEl)
 
             transition.setEl(popperEl)
+            // 使用捕获阶段，日历按钮的 mouseup.stop 也能收起外部的时间面板。
+            document.addEventListener('mouseup' ,handleDocumentMouseup ,true)
 
             if (props.trigger == 'click')
             {

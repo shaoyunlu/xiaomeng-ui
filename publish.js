@@ -15,7 +15,7 @@ packageJson.version = version.join('.');
 // 更新package.json文件
 fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
 
-// 发布到npm   发布npm需要手动执行了
+// 发布到npm   发布npm需要手动执行了  先执行 npm login
 //execSync('npm publish');
 
 // 提交到GitHub
